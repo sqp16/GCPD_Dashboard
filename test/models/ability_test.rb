@@ -21,6 +21,8 @@ class AbilityTest < ActiveSupport::TestCase
       assert @msawyer_ability.can? :manage, Suspect
       assert @msawyer_ability.can? :manage, Assignment
       assert @msawyer_ability.can? :read, Unit
+      
+      #here
       assert @msawyer_ability.can? :update, @major_crimes
       deny @msawyer_ability.can? :update, @homicide
       assert @msawyer_ability.can? :manage, @jblake

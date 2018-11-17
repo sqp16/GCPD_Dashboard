@@ -57,6 +57,7 @@ GEM
     builder (3.2.3)
     byebug (10.0.2)
     callsite (0.0.11)
+    cancan (1.6.10)
     cancancan (2.1.2)
     capybara (2.17.0)
       addressable
@@ -289,6 +290,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   byebug
+  cancan
   cancancan (= 2.1.2)
   capybara (= 2.17.0)
   carrierwave (= 1.2.2)
@@ -331,4 +333,4 @@ DEPENDENCIES
   will_paginate (= 3.1.6)
 
 BUNDLED WITH
-   1.16.2
+   1.16.5
