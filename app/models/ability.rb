@@ -18,6 +18,26 @@ class Ability
             can :manage, Suspect
             can :manage, Assignment
             can :read, Unit
+            
+            #they can update their own unit
+            can :update, Unit do |u|
+                u.id == user.officer.unit_id
+            end
+            
+            #they can update officers in their unit
+            can :update, Officer do |o|
+                officers_in_unit = user.officer.unit.officers.map{|o| o.id}
+                officers_in_unit.include? o.id
+            end
+        
+        end
+            
+            
+            
+            
+            
+                
+                
     
     end
     

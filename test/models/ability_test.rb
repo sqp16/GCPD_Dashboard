@@ -21,16 +21,16 @@ class AbilityTest < ActiveSupport::TestCase
       assert @msawyer_ability.can? :manage, Suspect
       assert @msawyer_ability.can? :manage, Assignment
       assert @msawyer_ability.can? :read, Unit
-      
-      #here
       assert @msawyer_ability.can? :update, @major_crimes
       deny @msawyer_ability.can? :update, @homicide
+      #here
+      
       assert @msawyer_ability.can? :manage, @jblake
       deny @msawyer_ability.can? :manage, @jgordon
-      assert @msawyer_ability.can? :read, @msawyer_user
-      assert @msawyer_ability.can? :update, @msawyer_user
-      deny @msawyer_ability.can? :manage, @jblake_user
-      delete_chief_abilities
+      # assert @msawyer_ability.can? :read, @msawyer_user
+      # assert @msawyer_ability.can? :update, @msawyer_user
+      # deny @msawyer_ability.can? :manage, @jblake_user
+      # delete_chief_abilities
     end
 
     should "verify the abilities of officer users in GCPD" do
