@@ -69,12 +69,9 @@ class Ability
                 u.id == user.officer.unit.id
             end
             
+        else
+            can :read, Crime
         end
-            
-            
-                
-                
-    
     end
     
     

@@ -61,11 +61,11 @@ class AbilityTest < ActiveSupport::TestCase
       delete_officer_abilities
     end
 
-  #   should "verify the abilities of guest users to read crimes" do
-  #     create_guest_abilities
-  #     deny @guest_ability.can? :manage, :all
-  #     assert @guest_ability.can? :read, Crime
-  #     delete_guest_abilities
-  #   end
+    should "verify the abilities of guest users to read crimes" do
+      create_guest_abilities
+      deny @guest_ability.can? :manage, :all
+      assert @guest_ability.can? :read, Crime
+      delete_guest_abilities
+    end
   end
 end
