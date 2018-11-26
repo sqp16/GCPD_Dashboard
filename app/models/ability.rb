@@ -24,12 +24,16 @@ class Ability
                 u.id == user.officer.unit_id
             end
             
-            #they can update officers in their unit
-            can :update, Officer do |o|
+            #can manage officers in their unit
+            can :manage, Officer do |a|
                 officers_in_unit = user.officer.unit.officers.map{|o| o.id}
-                officers_in_unit.include? o.id
+                officers_in_unit.include? a.id
             end
-        
+            
+            #can read and update own user info
+            can :manage, User do |u|
+                u.id == user.id
+            end
         end
             
             
