@@ -34,10 +34,42 @@ class Ability
             can :manage, User do |u|
                 u.id == user.id
             end
+        
+        elsif user.role? :officer
+            can :read, Investigation
+            can :new, Investigation
+            can :create, Investigation
+            
+            #can update investigations that the officer is assigned to
+            can :update, Investigation do |i|
+                curr_assigned_invest = user.officer.investigations.is_open.map{|a| a.id}
+                curr_assigned_invest.include? i.id
+            end
+            
+            can :manage, InvestigationNote
+            can :read, Assignment
+            can :read, Crime
+            can :manage, CrimeInvestigation
+            can :manage, Criminal
+            can :manage, Suspect
+            
+            #can manage officer info 
+            can :manage, Officer do |o|
+                o.id == user.officer.id
+            end
+            
+            #can manage own user info
+            can :manage, User do |u|
+                u.id == user.id
+            end
+            
+            can :index, Unit
+            
+            can :show, Unit do |u|
+                u.id == user.officer.unit.id
+            end
+            
         end
-            
-            
-            
             
             
                 

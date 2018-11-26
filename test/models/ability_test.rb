@@ -23,8 +23,6 @@ class AbilityTest < ActiveSupport::TestCase
       assert @msawyer_ability.can? :read, Unit
       assert @msawyer_ability.can? :update, @major_crimes
       deny @msawyer_ability.can? :update, @homicide
-      #here
-      
       assert @msawyer_ability.can? :manage, @jblake
       deny @msawyer_ability.can? :manage, @jgordon
       assert @msawyer_ability.can? :read, @msawyer_user
@@ -33,35 +31,35 @@ class AbilityTest < ActiveSupport::TestCase
       delete_chief_abilities
     end
 
-  #   should "verify the abilities of officer users in GCPD" do
-  #     create_officer_abilities
-  #     # no global privileges
-  #     deny @jblake_ability.can? :manage, :all
-  #     # testing particular abilities
-  #     assert @jblake_ability.can? :read, Investigation
-  #     assert @jblake_ability.can? :new, Investigation
-  #     assert @jblake_ability.can? :create, Investigation
-  #     assert @jblake_ability.can? :update, @lacey
-  #     deny @jblake_ability.can? :update, @pussyfoot
-  #     assert @jblake_ability.can? :manage, InvestigationNote
-  #     assert @jblake_ability.can? :read, Assignment
-  #     assert @jblake_ability.can? :read, Crime
-  #     assert @jblake_ability.can? :manage, CrimeInvestigation
-  #     assert @jblake_ability.can? :manage, Criminal
-  #     assert @jblake_ability.can? :manage, Suspect
-  #     assert @jblake_ability.can? :read, @jblake
-  #     deny @jblake_ability.can? :read, @msawyer
-  #     assert @jblake_ability.can? :update, @jblake
-  #     deny @jblake_ability.can? :update, @msawyer
-  #     assert @jblake_ability.can? :read, @jblake_user
-  #     deny @jblake_ability.can? :read, @msawyer_user
-  #     assert @jblake_ability.can? :update, @jblake_user
-  #     deny @jblake_ability.can? :update, @msawyer_user
-  #     assert @jblake_ability.can? :index, Unit
-  #     assert @jblake_ability.can? :show, @major_crimes
-  #     deny @jblake_ability.can? :show, @homicide
-  #     delete_officer_abilities
-  #   end
+    should "verify the abilities of officer users in GCPD" do
+      create_officer_abilities
+      # no global privileges
+      deny @jblake_ability.can? :manage, :all
+      # testing particular abilities
+      assert @jblake_ability.can? :read, Investigation
+      assert @jblake_ability.can? :new, Investigation
+      assert @jblake_ability.can? :create, Investigation
+      assert @jblake_ability.can? :update, @lacey
+      deny @jblake_ability.can? :update, @pussyfoot
+      assert @jblake_ability.can? :manage, InvestigationNote
+      assert @jblake_ability.can? :read, Assignment
+      assert @jblake_ability.can? :read, Crime
+      assert @jblake_ability.can? :manage, CrimeInvestigation
+      assert @jblake_ability.can? :manage, Criminal
+      assert @jblake_ability.can? :manage, Suspect
+      assert @jblake_ability.can? :read, @jblake
+      deny @jblake_ability.can? :read, @msawyer
+      assert @jblake_ability.can? :update, @jblake
+      deny @jblake_ability.can? :update, @msawyer
+      assert @jblake_ability.can? :read, @jblake_user
+      deny @jblake_ability.can? :read, @msawyer_user
+      assert @jblake_ability.can? :update, @jblake_user
+      deny @jblake_ability.can? :update, @msawyer_user
+      assert @jblake_ability.can? :index, Unit
+      assert @jblake_ability.can? :show, @major_crimes
+      deny @jblake_ability.can? :show, @homicide
+      delete_officer_abilities
+    end
 
   #   should "verify the abilities of guest users to read crimes" do
   #     create_guest_abilities
