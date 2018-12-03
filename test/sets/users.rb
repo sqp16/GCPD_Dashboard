@@ -1,6 +1,6 @@
 module Contexts
   module Users
-    # Context for both vet and assistant users
+    # Context for both officer and leader users
     def create_officer_users
       @alex = FactoryBot.create(:user, username: "alex", role: "officer")
       @winston  = FactoryBot.create(:user, username: "winston", role: "officer")

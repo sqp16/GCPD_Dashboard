@@ -1,6 +1,5 @@
 class UnitsController < ApplicationController
   before_action :check_login
-
   
   def index
     @active_units = Unit.active.alphabetical.paginate(page: params[:page]).per_page(10)
@@ -39,6 +38,15 @@ class UnitsController < ApplicationController
         format.html { render :action => "edit" }
 
       end
+    end
+  end
+  
+  def destroy
+    if @unit.destroy
+      flash[:notice] = "Successfully removed #{@unit.name}."
+      redirect_to medicines_url
+    else
+      render action: 'show'
     end
   end
 
