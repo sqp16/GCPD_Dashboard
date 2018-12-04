@@ -2,7 +2,6 @@ class OfficersController < ApplicationController
   before_action :set_officer, only: [:show, :edit, :update, :destroy]
   before_action :check_login
 
-
   def index
     @active_officers = Officer.active.alphabetical.paginate(page: params[:page]).per_page(10)
     @inactive_officers = Officer.inactive.alphabetical.paginate(page: params[:page]).per_page(10)
@@ -42,11 +41,17 @@ class OfficersController < ApplicationController
       end
     end
   end
-
-
-
-
-
+  
+  #New Search Function
+  def search_officers
+    if params[:query].blank?
+      flash[:notice] = "No results were found for #{params[:query]}."
+      redirect_back(fallback_location: @officers) 
+    end
+    @query = params[:query]
+    @officers = Officer.search(@query)
+  end
+  
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_officer

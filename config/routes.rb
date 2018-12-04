@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'home/about', to: 'home#about', as: :about
   get 'home/contact', to: 'home#contact', as: :contact
   get 'home/privacy', to: 'home#privacy', as: :privacy
-  get 'home/search', to: 'home#search', as: :search
+  # get 'home/search', to: 'home#search', as: :search
 
   # Authentication routes
   resources :sessions
@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   get 'assignments/new', to: 'assignments#new', as: :new_assignment
   post 'assignments', to: 'assignments#create', as: :assignments
   patch 'assignments/:id/terminate', to: 'assignments#terminate', as: :terminate_assignment
-
+  get 'officers/search', to: 'officers#search', as: :search_officers
+  get 'investigations/search', to: 'investigations#search', as: :search_investigations
+  
   # Toggle paths
 
 

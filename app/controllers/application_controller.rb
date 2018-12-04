@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
     redirect_to home_path
   end
 
-  # handle 404 errors with an exception as well
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-    flash[:error] = "Seek and you shall find... but not this time"
-    redirect_to home_path
-  end
+  # # handle 404 errors with an exception as well
+  # rescue_from ActiveRecord::RecordNotFound do |exception|
+  #   flash[:error] = "Seek and you shall find... but not this time"
+  #   redirect_to home_path
+  # end
   
   private
   # Handling authentication
