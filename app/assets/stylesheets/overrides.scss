@@ -1,6 +1,6 @@
 html {
   // Preloaded with four fonts; uncomment the one you prefer or add your own preferred font
-  font-family: 'Nunito', sans-serif;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   // font-family: 'Bitter', serif;
   // font-family: 'Josefin Sans', sans-serif;
   // font-family: 'Varela Round', sans-serif;
@@ -317,4 +317,38 @@ li.no_bullet {
 
 #customBlue-text{
   background-color: #00001b !important;
+}
+
+#whitebox {
+    width: auto;
+    background: white;
+    border-radius: 0px;
+    padding: 10;
+    border-top: solid white thick;
+    border-bottom: solid white thick;
+    border-left: solid white thick;
+    border-right: solid white thick;
+    margin: 20;
+    text-align: center;
+} 
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;} 
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:  #191931;
+    color: white;
 }

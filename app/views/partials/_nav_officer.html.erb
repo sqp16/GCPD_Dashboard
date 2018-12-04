@@ -1,13 +1,37 @@
-<nav id="nav">
-  <div class="container">
-    <ul class="left hide-on-med-and-down">
-      <li><%= link_to 'My Account', officer_path(current_user.officer) %></li>
-      <li><%= link_to 'My Investigations', investigations_path %></li>
-      <li><%= link_to 'Criminal List', criminals_path %></li>
+<!--<nav id="nav">-->
+<!--  <div class="container">-->
+<!--    <ul class="left hide-on-med-and-down">-->
+<!--      <li><%= link_to 'My Account', officer_path(current_user.officer) %></li>-->
+<!--      <li><%= link_to 'My Investigations', investigations_path %></li>-->
+<!--      <li><%= link_to 'Criminal List', criminals_path %></li>-->
 
-    </ul>
-    <ul class="right">
-      <li><%= link_to 'Logout', logout_path %></li>
-    </ul>
-  </div>
-</nav>
+<!--    </ul>-->
+<!--    <ul class="right">-->
+<!--      <li><%= link_to 'Logout', logout_path %></li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</nav>-->
+
+ <ul id="slide-out" class="sidenav sidenav-fixed">
+    <li><div class="user-view">
+      <!--<div class="background">-->
+      <!--  <img src="images/office.jpg">-->
+      <!--</div>-->
+
+      <a href="#user"><img class="circle" src="assets/images/male_avatar.jpg"></a>
+  
+      <a href="#name"><span class="white-text name">Welcome,</span></a>
+      <a href="#email"><span class="white-text email"><%= current_user.officer.rank%> <%= current_user.officer.proper_name %></span></a>
+    </div></li>
+      <li><div class="divider"></div></li>
+      <li class="center"><%= link_to 'MY PROFILE', officer_path(current_user.officer), {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
+      <li><div class="divider"></div></li>
+      <li class="center"><%= link_to 'MY INVESTIGATIONS', investigations_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
+      <li><div class="divider"></div></li>
+      <li class="center white-text text-darken-2"><%= link_to 'UNiTS LIST', units_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
+      <li><div class="divider"></div></li>
+      <li class="center white-text text-darken-2"><%= link_to 'CRIMINALS LIST', criminals_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
+      <li><div class="divider"></div></li>
+      
+  </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>

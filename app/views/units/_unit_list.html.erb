@@ -3,19 +3,20 @@
 <% if units.empty? %>
   <p>There are no <%= state.downcase %> units at this time.</p>
 <% else %>
-
-  <table class="striped highlight">
+<div id="whitebox">
+  <table id="customers">
     <thead>
-      <th>Unit</th>
+      <th class="align_center">Unit</th>
 
-
+      <th class="align_center">Number of Active Officers</th>
+      <th class="align_center">Number of Current Investigations</th>
       <th class="align_center">Edit</th>
     </thead>
     <% for unit in units %>
       <tr>
         <!-- <td><%# best_in_place unit, :name, as: :input %></td> -->
         <td><%= link_to unit.name, unit_path(unit) %></td>
-
+        <td align="center"><%= unit.officers.active.count%><td>
 
 
 
@@ -28,6 +29,7 @@
       </tr>
     <% end %>
   </table>
+ </div>
   <p class="supertiny"></p>
   <br />
   <%= will_paginate units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>

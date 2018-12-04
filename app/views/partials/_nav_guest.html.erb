@@ -1,7 +1,24 @@
-<nav id="nav">
-  <div class="container">
-    <ul class="right">
-      <li><%= link_to 'Login', login_path %></li>
-    </ul>
-  </div>
-</nav>
+<!--<nav id="nav">-->
+<!--  <div class="container">-->
+<!--    <ul class="right">-->
+<!--      <li><%= link_to 'Login', login_path %></li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<div class='navbar-fixed'>
+  <nav>
+    <div class="nav-wrapper white">
+      <a href="#!" class="brand-logo black-text"><img src="images/GCPD_Logo.png">GCPD Dashboard</a>
+      <ul class="right hide-on-med-and-down">
+        <li><%= link_to 'Home', home_path, {:style=>'color:#00001b;', :class => "css_class"} %></li>
+        <li><%= link_to 'About GCPD', about_path, {:style=>'color:#000000;', :class => "css_class"}%></li>
+        <li><%= link_to 'Contact Us', contact_path,  {:style=>'color:#00001b;', :class => "css_class"}%></li>
+        <li><%= link_to 'Privacy Policy', privacy_path,  {:style=>'color:#00001b;', :class => "css_class"}%></li>
+        <li><%= link_to 'Login', login_path,  {:style=>'color:#32CD32;', :class => "css_class"}%></li>
+        <!-- Dropdown Trigger -->
+        <!--<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
+      </ul>
+    </div>
+  </nav>
+</div>
