@@ -29,6 +29,11 @@ $(function() {
    });
 });
 
+$(document).on("click","#yourButton",function(){
+  alert("working");
+  $("#myform").show();
+});
+
 // Best in place functionality
 $(document).ready(function() {
   jQuery(".best_in_place").best_in_place();
@@ -45,6 +50,8 @@ $(document).ready(function() {
     }
   }
 });
+
+
 
 
 

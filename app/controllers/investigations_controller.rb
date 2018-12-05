@@ -25,7 +25,7 @@ class InvestigationsController < ApplicationController
 
   def edit
   end
-
+  
   def create 
     @investigation = Investigation.new(investigation_params)
     if @investigation.save
@@ -34,7 +34,21 @@ class InvestigationsController < ApplicationController
       render action: 'new'
     end
   end
-
+  
+    #New Search Function
+  def search
+    if params[:query].blank?
+      redirect_back(fallback_location: @investigations) 
+    end
+    @query = params[:query]
+    @investigations = Investigation.title_search(@query)
+    @total_hits = @investigations.size
+    if @total_hits == 0
+      flash[:error] = "There are no investigations found with the term #{@query}."
+      redirect_back(fallback_location: @investigations) 
+    end
+  end
+  
   def update
     @investigation = Investigation.find(params[:id])
     respond_to do |format|

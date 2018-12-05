@@ -33,8 +33,8 @@ Rails.application.routes.draw do
 
 
   # Other custom routes
-  get 'officers/search', to: 'officers#search', as: :officer_search
-  get 'investigations/search', to: 'investigations#search', as: :investigation_search
+  get 'officers_search', to: 'officers#search', as: :officer_search
+  get 'investigations_search', to: 'investigations#search', as: :investigation_search
   
 
 

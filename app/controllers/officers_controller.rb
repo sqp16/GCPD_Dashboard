@@ -45,11 +45,15 @@ class OfficersController < ApplicationController
   #New Search Function
   def search
     if params[:query].blank?
-      flash[:notice] = "No results were found for #{params[:query]}."
       redirect_back(fallback_location: @officers) 
     end
     @query = params[:query]
     @officers = Officer.search(@query)
+    @total_hits = @officers.size
+    if @total_hits == 0
+      flash[:error] = "There are no officers found with the term #{@query}."
+      redirect_back(fallback_location: @officers) 
+    end
   end
   
   private

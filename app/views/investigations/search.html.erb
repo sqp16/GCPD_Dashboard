@@ -1,1 +1,12 @@
+<h5>Search result for term <em>'<%= @query %>'</em> in Investigations resulted in <%= pluralize(@total_hits, 'hit') %></h5>
+<p class="supertiny">&nbsp;</p>
 
+<% unless @investigations.empty? %>
+  <p><em><strong>Investigations matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for investigation in @investigations do %>
+      <li><%= link_to investigation.title, investigation_path(investigation) %></li>
+    <% end %>
+  </ul>
+  <p class="smtext">&nbsp;</p>
+<% end %>
