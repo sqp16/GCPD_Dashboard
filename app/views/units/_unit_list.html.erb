@@ -16,16 +16,13 @@
       <tr>
         <!-- <td><%# best_in_place unit, :name, as: :input %></td> -->
         <td><%= link_to unit.name, unit_path(unit) %></td>
-        <td align="center"><%= unit.officers.active.count%><td>
-
-
-
-
-      <td class="align_center">
-        <%= link_to edit_unit_path(unit) do %>
-          <i class="material-icons">edit</i>
-        <% end %>
-      </td>
+        <td><%= unit.number_of_active_officers%></td>
+        <td><%= unit.number_of_unique_open_investigations%></td>
+        <td class="align_center">
+          <%= link_to edit_unit_path(unit) do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </table>

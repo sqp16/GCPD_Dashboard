@@ -42,9 +42,10 @@ class UnitsController < ApplicationController
   end
   
   def destroy
+    @unit = Unit.find(params[:id])
     if @unit.destroy
       flash[:notice] = "Successfully removed #{@unit.name}."
-      redirect_to medicines_url
+      redirect_to units_url
     else
       render action: 'show'
     end
