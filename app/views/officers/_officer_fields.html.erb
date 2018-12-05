@@ -5,7 +5,10 @@
 <!--Why check role here-->
 <% if current_user.role?(:commish) %>
   <%= f.input :role, collection: User::ROLES, include_blank: true %>
+<% elsif current_user.role?(:chief) %>
+  <%= f.input :role, value: :officer%>
 <% end %>
+
 
 <%= f.input :unit_id, collection: Unit.alphabetical.to_a, include_blank: true %>
 <%= f.input :ssn, label_html: { class: 'active' } %>

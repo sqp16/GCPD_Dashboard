@@ -10,7 +10,7 @@
 
       <th class="align_center">Number of Active Officers</th>
       <th class="align_center">Number of Current Investigations</th>
-      <th class="align_center">Options</th>
+      <th class="align_center">Edit</th>
     </thead>
     <% for unit in units %>
       <tr>
@@ -21,9 +21,6 @@
         <td class="align_center">
           <%= link_to edit_unit_path(unit) do %>
             <i class="material-icons">edit</i>
-          <% end %>
-          <%= link_to(unit_path(unit), method: :delete, data: { confirm: 'Are you sure you wish to delete this information?' }) do %>
-              <i class="material-icons">delete</i>
           <% end %>
         </td>
       </tr>

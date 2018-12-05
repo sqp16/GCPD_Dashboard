@@ -7,7 +7,6 @@
     <!--</div>-->
     <div class="col s10">
         <%= form_with url: investigation_search_path, method: :get, class: "form-inline", id: "search" do %>
-              
               <%= text_field_tag 'query', '', placeholder: "Search ..." %>
               <!-- submitting via js (press enter) so not using... -->
               <%# submit_tag('Find') %>
