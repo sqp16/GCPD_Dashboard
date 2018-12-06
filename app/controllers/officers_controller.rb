@@ -22,11 +22,9 @@ class OfficersController < ApplicationController
   def create
     @officer = Officer.new(officer_params)
     @user = User.new(user_params)
-    # unless current_user.role? (:commish)
+    unless current_user.role? (:commish)
       @user.role = "officer"
-    # end
-    # @user.role = @officer.role
-    # @user.role = @officer.user.role
+    end
     @user.active = true
     if !@user.save
       @officer.valid?
@@ -46,7 +44,7 @@ class OfficersController < ApplicationController
   def update
     respond_to do |format|
       if @officer.update_attributes(officer_params)
-        format.html { redirect_to @officer, notice: "Updated #{criminal.proper_name}." }
+        format.html { redirect_to @officer, notice: "Updated #{@officer.proper_name}." }
       else
         format.html { render :action => "edit" }
         

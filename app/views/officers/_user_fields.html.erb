@@ -1,8 +1,3 @@
 <%= f.input :username, label_html: { class: 'active' } %>
 <%= f.input :password, label_html: { class: 'active' } %>
 <%= f.input :password_confirmation, label_html: { class: 'active' } %>
-<% if current_user.role?(:commish) %>
-  <%= f.input :role, collection: User::ROLES, include_blank: true %>
-<% elsif current_user.role?(:chief) %>
-  <%= f.input :role, value: :officer%>
-<% end %>
