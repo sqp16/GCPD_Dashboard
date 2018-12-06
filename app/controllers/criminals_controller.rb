@@ -4,8 +4,8 @@ class CriminalsController < ApplicationController
     
     def index
         # @all_criminals = Criminal.all.alphabetical.paginate(page: params[:crim_page]).per_page(10)
-        @convicted_felon = Criminal.prior_record.paginate(page: params[:pr_page]).per_page(10)
-        @enhanced_criminals = Criminal.enhanced.paginate(page: params[:e_crim_page]).per_page(10)
+        @convicted_felon = Criminal.prior_record.alphabetical.paginate(page: params[:pr_page]).per_page(10)
+        @enhanced_criminals = Criminal.enhanced.alphabetical.paginate(page: params[:e_crim_page]).per_page(10)
     end
     
     def show
@@ -47,7 +47,7 @@ class CriminalsController < ApplicationController
         @criminals = Criminal.search(@query)
         @total_hits = @criminals.size
         if @total_hits == 0
-          flash[:error] = "There are no officers found with the term #{@query}."
+          flash[:error] = "There are no criminals found with the term #{@query}."
           redirect_back(fallback_location: @criminals) 
         end
     end

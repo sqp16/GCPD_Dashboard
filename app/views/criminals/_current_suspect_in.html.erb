@@ -1,0 +1,25 @@
+<% if @current_suspect_in.empty? %>
+  <h5>Not currently a suspect in any case.</h5>
+<% else%>
+
+  <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">Currently a Suspect in: </span>
+      <table class="lined">
+        <thead>
+          <th>Case</th>
+          <th>Open</th>
+        </thead>
+          <% for invest in @current_suspect_in %>
+            <tr>
+              <td>&nbsp;<%= link_to criminal.investigation.title, investigation_path(criminal.investigation) %></td>
+              <td>
+                <%= invest.open %>
+              </td>
+              
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>

@@ -2,11 +2,11 @@
   <tabs>
 
     <tab name="enhanced beings" v-bind:selected="true">
-      <%= render :partial => "criminal_list", locals: {criminals: @, state: 'active'} %>
+      <%= render :partial => "criminal_list_enhanced", locals: {criminals: @enhanced_criminals, state: 'enhanced'} %>
     </tab>
 
     <tab name="convicted felon">
-      <%= render :partial => "criminal_list", locals: {criminals: @inactive_criminals, state: 'inactive'} %>
+      <%= render :partial => "criminal_list_felons", locals: {criminals: @convicted_felon, state: 'convicted felon'} %>
     </tab>
 
   </tabs>
