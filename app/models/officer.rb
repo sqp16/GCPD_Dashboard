@@ -2,7 +2,13 @@ class Officer < ApplicationRecord
   include AppHelpers::Activeable::InstanceMethods
   extend AppHelpers::Activeable::ClassMethods
   include AppHelpers::Validations
-
+  
+  attr_accessor :username, :password, :password_confirmation, :role
+  
+  # Delegates
+  delegate :username, to: :user, allow_nil: true
+  # delegate :role, to: :user, allow_nil: true
+  
   # Relationships
   belongs_to :unit
   belongs_to :user

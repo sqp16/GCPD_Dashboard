@@ -4,8 +4,9 @@
       <!--<div class="background">-->
       <!--  <img src="images/office.jpg">-->
       <!--</div>-->
-
-      <a href="#user"><img class="circle" src="assets/images/male_avatar.jpg"></a>
+      <a href="#user"><img class="circle" src="~/app/assets/images/male_avatar.jpg"></a>
+      <!--<a href="#user"><%= image_tag "male_avatar.jpg"%></a>-->
+      <!--<%link_to(image_tag('male_avatar.jpg'),home_path)%> -->
   
       <a href="#name"><span class="center white-text name">Welcome,</span></a>
       <a href="#email"><span class=" center white-text email"><%= current_user.officer.rank%> <%= current_user.officer.proper_name %></span></a>
@@ -22,6 +23,8 @@
       <li><%= link_to 'CRIMES LIST', crimes_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
       <li><div class="divider"></div></li>
       <li><%= link_to 'CRIMINALS LIST', criminals_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
+      <li><div class="divider"></div></li>
+      <li><%= link_to 'USERS LIST', users_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
       <li><div class="divider"></div></li>
       
   </ul>

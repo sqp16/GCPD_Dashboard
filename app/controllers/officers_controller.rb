@@ -21,20 +21,32 @@ class OfficersController < ApplicationController
 
   def create
     @officer = Officer.new(officer_params)
+    @user = User.new(user_params)
+    # unless current_user.role? (:commish)
+      @user.role = "officer"
+    # end
+    # @user.role = @officer.role
+    # @user.role = @officer.user.role
     @user.active = true
-    if @officer.save
-      flash[:notice] = "Successfully created #{@officer.proper_name}."
-      redirect_to officer_path(@officer) 
-    else
+    if !@user.save
+      @officer.valid?
       render action: 'new'
-    end      
+    else 
+      @officer.user_id = @user.id
+      if @officer.save
+        flash[:notice] = "Successfully created #{@officer.proper_name}."
+        redirect_to officer_path(@officer) 
+      else
+        render action: 'new'
+      end
+    end
   end
+  
 
   def update
     respond_to do |format|
       if @officer.update_attributes(officer_params)
-        format.html { redirect_to @officer, notice: "Updated all information" }
-        
+        format.html { redirect_to @officer, notice: "Updated #{criminal.proper_name}." }
       else
         format.html { render :action => "edit" }
         
@@ -64,6 +76,10 @@ class OfficersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def officer_params
     params.require(:officer).permit(:first_name, :last_name, :rank, :ssn, :active, :unit_id)
+  end
+  
+   def user_params      
+    params.require(:officer).permit(:username, :password, :password_confirmation, :active, :role)
   end
 
 
