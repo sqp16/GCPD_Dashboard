@@ -4,14 +4,15 @@
   <p>There are no <%= state.downcase %> crimes at this time.</p>
 <% else %>
 
-  <table id="customTable">
-    <thead>
-      <th>Crime</th>
-      <th>Level</th>
-
-
-      <th class="align_center">Edit</th>
-    </thead>
+  <div id="whitebox">
+    <table id="customTable">
+      <thead>
+        <th>Crime</th>
+        <th>Level</th>
+  
+  
+        <th class="align_center">Edit</th>
+      </thead>
     <% for crime in crimes %>
       <tr>
         <td><%= best_in_place crime, :name, as: :input %><%# crime.name %></td>
@@ -22,14 +23,15 @@
 
 
 
-        <td class="align_center">
-          <%= link_to edit_crime_path(crime) do %>
-              <i class="material-icons">edit</i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+          <td class="align_center">
+            <%= link_to edit_crime_path(crime) do %>
+                <i class="material-icons">edit</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   <p class="supertiny"></p>
   <br />
   <%= will_paginate crimes, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>

@@ -3,7 +3,7 @@ class CriminalsController < ApplicationController
     # before_action :check_login
     
     def index
-        # @all_criminals = Criminal.all.alphabetical.paginate(page: params[:crim_page]).per_page(10)
+        @all_criminals = Criminal.alphabetical.paginate(page: params[:crim_page]).per_page(10)
         @convicted_felon = Criminal.prior_record.alphabetical.paginate(page: params[:pr_page]).per_page(10)
         @enhanced_criminals = Criminal.enhanced.alphabetical.paginate(page: params[:e_crim_page]).per_page(10)
     end

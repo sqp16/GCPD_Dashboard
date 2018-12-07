@@ -3,19 +3,20 @@
 <% if investigations.empty? %>
   <p>There are no <%= state.downcase %> investigations at this time.</p>
 <% else %>
-
-  <table id="customTable">
-    <thead>
-      <th>Title</th>
-      <th>Date <%= state %></th>
-    </thead>
-    <% for investigation in investigations %>
-      <tr>
-        <td><%= link_to investigation.title, investigation_path(investigation) %></td>
-        <td><%= display_date(investigation, state) %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div id="whitebox">
+    <table id="customTable">
+      <thead>
+        <th>Title</th>
+        <th>Date <%= state %></th>
+      </thead>
+      <% for investigation in investigations %>
+        <tr>
+          <td><%= link_to investigation.title, investigation_path(investigation) %></td>
+          <td><%= display_date(investigation, state) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   <p class="supertiny"></p>
   <br />
   <%= will_paginate investigations, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>

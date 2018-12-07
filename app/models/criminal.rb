@@ -7,7 +7,7 @@ class Criminal < ApplicationRecord
   scope :alphabetical, -> { order('last_name, first_name') }
   scope :prior_record, -> { where(convicted_felon: true) }
   scope :enhanced, -> { where(enhanced_powers: true) }
-  scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ? OR aka LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%") }
+  scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ? OR aka LIKE ?', "#{term}%", "#{term}%", "%#{term}%") }
   
   # Validations
   validates_presence_of :first_name, :last_name

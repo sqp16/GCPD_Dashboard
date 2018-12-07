@@ -1,1 +1,29 @@
-<%# stuff goes here %>
+<% unless @investigation.investigation_notes.empty? %>
+  <div class="card yellow lighten-4">
+    <div class="card-content">
+      <span class="card-title">Investigation Notes</span>
+      <ul>
+        <% for notes in @investigation.investigation_notes %>
+          <li>
+            <%= investigation_note.date %>
+            <%= link_to investigation.officer.name, officer_path(investigation.officer) %>
+            <%= investigation_note.content %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <% if can? :new, InvestigationNote %>
+      <div class="card-action">
+        <%= link_to "Add a new note", new_investigation_note_path(investigation_id: @investigation.id, officer_id: @current_user.officer) %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <% if can? :new, InvestigationNote %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new note", new_investigation_note_path(investigation_id: @investigation.id, officer_id: @current_user.officer) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

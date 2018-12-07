@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :investigations
   resources :crimes
   resources :criminals
+  resources :investigation_notes
 
   # Routes for assignments
   get 'assignments/new', to: 'assignments#new', as: :new_assignment
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   get 'officers_search', to: 'officers#search', as: :officer_search
   get 'investigations_search', to: 'investigations#search', as: :investigation_search
   get 'criminals_search', to: 'criminals#search', as: :criminal_search
+  get 'investigations/:id/investigation_notes', to: 'investigations#investigation_notes', as: :investigation_investigation_notes
 
 
 

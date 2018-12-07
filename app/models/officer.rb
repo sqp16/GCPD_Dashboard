@@ -20,7 +20,7 @@ class Officer < ApplicationRecord
   scope :alphabetical, -> { order('last_name, first_name') }
   scope :for_unit, -> (unit_id){ where(unit_id: unit_id) }
   scope :detectives, -> { where('rank LIKE ?', "%detective%") }
-  scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ?', "%#{term}%", "%#{term}%") }
+  scope :search, ->(term) { where('first_name LIKE ? OR last_name LIKE ?', "#{term}%", "#{term}%") }
   
   # Validations
   validates_presence_of :first_name, :last_name, :user_id, :unit_id, :ssn

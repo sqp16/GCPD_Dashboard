@@ -4,31 +4,29 @@
   <p>There are no <%= state.downcase %> officers at this time.</p>
 <% else %>
 
-  <table class="customTable">
-    <thead>
-      <th>Name</th> 
-      <th>Rank</th>
-
-
-      <th class="align_center">Edit</th>
-    </thead>
-    <% for officer in officers %>
-      <tr>
-        <td><%= link_to officer.name, officer_path(officer) %></td>
-        <td><%= officer.rank %></td>
-
-
-
-
-
-        <td class="align_center">
-          <%= link_to edit_officer_path(officer) do %>
-              <i class="material-icons">edit</i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+  <div id="whitebox">
+    <table id="customTable">
+      <thead>
+        <th>Name</th> 
+        <th>Rank</th>
+  
+  
+        <th class="align_center">Edit</th>
+      </thead>
+      <% for officer in officers %>
+        <tr>
+          <td><%= link_to officer.name, officer_path(officer) %></td>
+          <td><%= officer.rank %></td>
+  
+          <td class="align_center">
+            <%= link_to edit_officer_path(officer) do %>
+                <i class="material-icons">edit</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   <p class="supertiny"></p>
   <br />
   <%= will_paginate officers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
