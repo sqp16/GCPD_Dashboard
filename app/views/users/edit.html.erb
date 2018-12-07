@@ -1,3 +1,5 @@
-<%= render partial: "partials/form_structure", locals: {object: @user, 
-                                                        type_of_form: "Edit User",
-                                                        fields: "fields"} %>
+<h5>Editing User</h5>
+
+<%= render 'form', user: @user %>
+
+<%= link_to 'Back', users_path %>

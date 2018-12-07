@@ -32,7 +32,7 @@ class OfficersController < ApplicationController
     else 
       @officer.user_id = @user.id
       if @officer.save
-        flash[:notice] = "Successfully created #{@officer.proper_name}."
+        flash[:notice] = "Successfully created '#{@officer.proper_name}'."
         redirect_to officer_path(@officer) 
       else
         render action: 'new'
@@ -40,11 +40,20 @@ class OfficersController < ApplicationController
     end
   end
   
+  def destroy
+    @officer = Officer.find(params[:id])
+    if @officer.destroy
+      flash[:notice] = "Successfully removed '#{@officer.proper_name}'."
+      redirect_to officers_url
+    else
+      render action: 'show'
+    end
+  end
 
   def update
     respond_to do |format|
       if @officer.update_attributes(officer_params)
-        format.html { redirect_to @officer, notice: "Updated #{@officer.proper_name}." }
+        format.html { redirect_to @officer, notice: "Updated '#{@officer.proper_name}'." }
       else
         format.html { render :action => "edit" }
         

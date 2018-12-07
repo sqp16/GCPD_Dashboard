@@ -18,7 +18,7 @@ class CrimesController < ApplicationController
   def create
     @crime = Crime.new(crime_params)
     if @crime.save
-      redirect_to crimes_path, notice: "Successfully added #{@crime.name} to GCPD."
+      redirect_to crimes_path, notice: "Successfully added '#{@crime.name}' to GCPD."
     else
       render action: 'new'
     end
@@ -28,7 +28,7 @@ class CrimesController < ApplicationController
     @crime = Crime.find(params[:id])
     respond_to do |format|
       if @crime.update_attributes(crime_params)
-        flash[:notice] = "Successfully updated #{@crime.name}."
+        flash[:notice] = "Successfully updated '#{@crime.name}'."
         format.html { redirect_to crimes_path}
       else
         format.html { render :action => "edit" }
