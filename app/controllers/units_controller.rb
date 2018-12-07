@@ -22,7 +22,7 @@ class UnitsController < ApplicationController
   def create
     @unit = Unit.new(unit_params)
     if @unit.save
-      redirect_to units_path, notice: "Successfully added #{@unit.name} to GCPD."
+      redirect_to units_path, notice: "Successfully added '#{@unit.name}' to GCPD."
     else
       render action: 'new'
     end
@@ -32,8 +32,7 @@ class UnitsController < ApplicationController
     @unit = Unit.find(params[:id])
     respond_to do |format|
       if @unit.update_attributes(unit_params)
-        format.html { redirect_to @unit, notice: "Updated information" }
-
+        format.html { redirect_to @unit, notice: "Updated information for '#{@unit.name}'." }
       else
         format.html { render :action => "edit" }
 
@@ -44,20 +43,15 @@ class UnitsController < ApplicationController
   def destroy
     @unit = Unit.find(params[:id])
     if @unit.destroy
-      flash[:notice] = "Successfully removed #{@unit.name}."
+      flash[:notice] = "Successfully removed '#{@unit.name}'."
       redirect_to units_url
     else
       render action: 'show'
     end
   end
 
-
-
-
-
-
   private
-  def unit_params
-    params.require(:unit).permit(:name, :active)
-  end
+    def unit_params
+      params.require(:unit).permit(:name, :active)
+    end
 end
