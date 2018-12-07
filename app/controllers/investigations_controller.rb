@@ -29,7 +29,7 @@ class InvestigationsController < ApplicationController
   def create 
     @investigation = Investigation.new(investigation_params)
     if @investigation.save
-      redirect_to investigations_path, notice: "Successfully added #{@investigation.title} to GCPD."
+      redirect_to investigations_path, notice: "Successfully added '#{@investigation.title}' to GCPD."
     else
       render action: 'new'
     end
@@ -44,16 +44,23 @@ class InvestigationsController < ApplicationController
     @investigations = Investigation.title_search(@query)
     @total_hits = @investigations.size
     if @total_hits == 0
-      flash[:error] = "There are no investigations found with the term #{@query}."
+      flash[:error] = "There are no investigations found with the term '#{@query}'."
       redirect_back(fallback_location: @investigations) 
     end
+  end
+  
+  def close
+    @investigation.date_closed = Date.today
+    @investigation.save
+    flash[:notice] = "Investigation '#{@investigation.title}' has been closed."
+    redirect_to investigations_path
   end
   
   def update
     @investigation = Investigation.find(params[:id])
     respond_to do |format|
       if @investigation.update_attributes(investigation_params)
-        format.html { redirect_to @investigation, notice: "Updated information" }
+        format.html { redirect_to @investigation, notice: "Updated information for '#{@investigation.title}.' " }
         # format.json { respond_with_bip(@investigation) }
       else
         format.html { render :action => "edit" }

@@ -8,7 +8,7 @@
             <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
             <%= f.input :officer_id, as: :hidden, input_html: { value: @current_user.officer } %>
             <%= f.input :content, label_html: { class: 'active' } %>
-            <%= f.input :date, as:hidden, input_html: { value: Date.current } %>
+            <%= f.input :date, input_html: { value: Date.current } %>
         </div>
       </div>
       <div class="row">

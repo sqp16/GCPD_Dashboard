@@ -35,17 +35,13 @@ Rails.application.routes.draw do
 
 
   # Other custom routes
+  get 'investigations/:id/investigation_notes', to: 'investigations#investigation_notes', as: :investigation_investigation_notes
+  patch 'investigations/:id/close', to: 'investigations#close', as: :close_investigation
+
+  # Routes for searching
   get 'officers_search', to: 'officers#search', as: :officer_search
   get 'investigations_search', to: 'investigations#search', as: :investigation_search
   get 'criminals_search', to: 'criminals#search', as: :criminal_search
-  get 'investigations/:id/investigation_notes', to: 'investigations#investigation_notes', as: :investigation_investigation_notes
-
-
-
-  # Routes for searching
-
-
-
 
   # You can have the root of your site routed with 'root'
   root 'home#index'

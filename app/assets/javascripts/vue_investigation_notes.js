@@ -2,7 +2,7 @@
 //// Setting up a general ajax method to handle
 //// transfer of data between client and server
 ////////////////////////////////////////////////
-// var investigation_notes;
+var investigation_notes;
 
 function run_ajax(method, data, link, callback=function(res){investigation_notes.get_investigation_notes()}){
   $.ajax({
@@ -42,9 +42,9 @@ function run_ajax(method, data, link, callback=function(res){investigation_notes
     
       // Behaviors associated with this component
       methods: {
-        // remove_record: function(dosage){
-        //   run_ajax('DELETE', {dosage: dosage}, '/dosages/'.concat(dosage['id'], '.json'));       
-        // }
+        remove_record: function(investigation_note){
+          run_ajax('DELETE', {investigation_note: investigation_note}, '/investigation_notes/'.concat(investigation_note['id'], '.json'));       
+        }
       }
     });
     
