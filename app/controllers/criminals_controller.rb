@@ -29,6 +29,17 @@ class CriminalsController < ApplicationController
         end
     end
     
+    def destroy
+        @criminal = Criminal.find(params[:id])
+        if @criminal.destroy
+          flash[:notice] = "Successfully removed '#{@criminal.proper_name}'."
+          redirect_to criminals_url
+        else
+          render action: 'show'
+        end
+    end
+
+    
     def update
         respond_to do |format|
             if @criminal.update_attributes(criminal_params)
