@@ -68,10 +68,6 @@ class InvestigationsController < ApplicationController
       end
     end
   end
-  
-  # def investigation_notes
-  #   @investigation_notes = InvestigationNote.for_(@visit.id).joins(:medicine).select('dosages.*, medicines.name as medicine_name')
-  # end
 
 
 

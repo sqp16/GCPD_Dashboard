@@ -13,9 +13,9 @@
       </thead>
       <% for criminal in criminals %>
         <tr>
-          <td><%= link_to criminal.name, criminal_path(criminal) %></td>
+          <td><%= link_to criminal.proper_name, criminal_path(criminal) %></td>
           <td><%= criminal.aka %></td>
-          <td><%= criminal.convicted_felon %></td>
+          <td><%= criminal.convicted_felon ? "Yes" : "No" %></td>
   
           <td class="align_center">
             <%= link_to edit_criminal_path(criminal) do %>

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col s7">
-    <h4>New Assignment:</h4>
+    <h4>New Assignment for <%= @officer.proper_name%> from <%= @officer.unit.name %></h4>
     <%= simple_form_for(@assignment) do |f| %>
       <%= f.error_notification %>
       <div class="row">
@@ -18,7 +18,30 @@
     <% end %>
   </div>
   <div class="col s5">
-    <h4>For Officer:</h4>
-    <h5><%= @officer.name %></h5>
+    <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Assignments</span>
+        <table class="lined">
+          <thead>
+            <th>Case</th>
+            <th>Starting</th>
+          </thead>
+            <% for assignment in @officer.assignments.current %>
+              <tr>
+                <td>
+                  <% if can? :terminate, Assignment %>
+                    <%= link_to(terminate_assignment_path(assignment, from: "officer"), class: 'remove', method: :patch) do %>
+                      x&nbsp;&nbsp;
+                    <% end %>
+                  <% end %>
+                  &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+                </td>
+                <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+    
   </div>
 </div>

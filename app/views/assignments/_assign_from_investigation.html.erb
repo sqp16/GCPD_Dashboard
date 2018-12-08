@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col s7">
+    <h4>New Assignment to <%= @investigation.title%></h4>
+    <%= simple_form_for(@assignment) do |f| %>
+      <%= f.error_notification %>
+      <div class="row">
+        <div class="form-inputs">
+          <%= f.input :officer_id, collection: (Officer.active.alphabetical.to_a - @investigation_officers), include_blank: true %>
+          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation_id } %>
+          <%= f.input :from, as: :hidden, input_html: { value: "investigation" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-actions col s8">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col s5">
+    <div class="card">
+    <div class="card-content">
+      <span class="card-title">Active Officers Currently with No Assignment</span>
+        <table class="lined">
+          <thead>
+            <th>Officer</th>
+            <th>Unit</th>
+          </thead>
+          
+          <!--I NEED HELP HERE-->
+            <% for officer in @active_officers %>
+              <tr>
+                <!--@officer = Officer.find(params[:officer])-->
+                <% if officer.assignments.count == 0 %>
+                  <td><%= link_to officer.proper_name, officer_path(officer) %></td>
+                  <td><%= link_to officer.unit.name, unit_path(officer.unit) %></td>
+                <% end %>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col s5">
+    <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Assignments</span>
+        <table class="lined">
+          <thead>
+            <th>Officer</th>
+            <th>Unit</th>
+            <th>Starting</th>
+          </thead>
+            <% for assignment in @investigation.assignments %>
+              <tr>
+                <td><%= link_to assignment.officer.proper_name, officer_path(assignment.officer) %></td>
+                <td><%= link_to assignment.officer.unit.name, unit_path(assignment.officer.unit) %></td>
+                <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+</div>

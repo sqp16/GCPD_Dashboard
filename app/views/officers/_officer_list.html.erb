@@ -15,7 +15,7 @@
       </thead>
       <% for officer in officers %>
         <tr>
-          <td><%= link_to officer.name, officer_path(officer) %></td>
+          <td><%= link_to officer.proper_name, officer_path(officer) %></td>
           <td><%= officer.rank %></td>
   
           <td class="align_center">
