@@ -15,7 +15,10 @@ class InvestigationNotesController < ApplicationController
         else
             @investigation = Investigation.find(params[:investigation_note][:investigation_id])
             @officer = @current_user.officer
-            render action: 'new', locals: { investigation: @investigation, officer: @officer }
+            flash[:alert] = "Failed to create investigation note."
+            redirect_to investigation_path(@investigation)
+
+            # render action: 'new', locals: { investigation: @investigation, officer: @officer }
         end
     end
     

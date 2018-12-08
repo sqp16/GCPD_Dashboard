@@ -4,7 +4,6 @@ class AssignmentsController < ApplicationController
   def new
     @assignment = Assignment.new
     @active_officers = Officer.active.alphabetical.map{|o| o}
-    puts @active_officers
     unless params[:officer_id].nil?
       @officer = Officer.find(params[:officer_id])
       @officer_investigations = @officer.assignments.current.map{|a| a.investigation }
@@ -31,14 +30,11 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     @assignment.end_date = Date.current
     @assignment.save
-    flash[:notice] = "#{@assignment.officer.proper_name}'s assignment to '#{@assignment.investigation.title}' has been successfully terminated."
-    redirect_to officer_path(@assignment.officer)
+    flash[:notice] = "'#{@assignment.officer.proper_name}' is no longer assignmed to '#{@assignment.investigation.title}'."
   end
-  
-  
 
   private
-  def assignment_params
-    params.require(:assignment).permit(:investigation_id, :officer_id, :start_date, :end_date)
-  end
+    def assignment_params
+      params.require(:assignment).permit(:investigation_id, :officer_id, :start_date, :end_date)
+    end
 end

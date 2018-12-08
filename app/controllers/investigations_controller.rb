@@ -1,5 +1,5 @@
 class InvestigationsController < ApplicationController
-  before_action :set_investigation, only: [:show, :edit, :update, :close, :crimes]
+  before_action :set_investigation, only: [:show, :edit, :update, :close, :crimes, :investigation_notes]
   before_action :check_login
 
 
@@ -33,6 +33,10 @@ class InvestigationsController < ApplicationController
     else
       render action: 'new'
     end
+  end
+  
+  def investigation_notes
+    @investigation_notes = @investigation.investigation_notes
   end
   
     #New Search Function

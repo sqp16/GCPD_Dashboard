@@ -1,6 +1,5 @@
 <div id="form-template">
   <h5>New Investigation Note</h5>
-
   <% @investigation_note = InvestigationNote.new %>
   <!-- now the form template itself -->
   <div class="row">
@@ -11,7 +10,7 @@
           
           <div class="form-inputs">
             <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
-            <%= f.input :officer_id, as: :hidden, input_html: { value: @current_user.officer } %>
+            <%= f.input :officer_id, as: :hidden, input_html: { value: @current_user.officer.id } %>
             <%= f.input :content, label_html: { class: 'active' } %>
             <%= f.input :date, input_html: { value: Date.current } %>
           </div>

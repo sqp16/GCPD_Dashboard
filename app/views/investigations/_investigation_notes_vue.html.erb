@@ -3,9 +3,9 @@
   <% unless @investigation.investigation_notes.empty? %>
     <div class="card yellow lighten-4">
       <div class="card-content">
-        <span class="card-title">Notes</span>
+        <span class="card-title">Investigation Notes</span>
         <ul is='investigation-note-row' 
-            v-for="note in investigation.investigation_notes" 
+            v-for="note in investigation_notes" 
             v-bind:investigation_note="note"
             class="no_bullet">  
         </ul>
@@ -24,6 +24,7 @@
     </div>
   <% else %>
     <% if can? :new, InvestigationNote %>
+    
       <div class="card grey lighten-3">
         <div class="card-action">
           <!-- Note in class that message not consistent with activity -->

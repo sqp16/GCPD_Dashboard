@@ -1,13 +1,14 @@
 <% unless @investigation.investigation_notes.empty? %>
+  <h2>Hello</h2>
   <div class="card yellow lighten-4">
     <div class="card-content">
       <span class="card-title">Investigation Notes</span>
       <ul>
-        <% for notes in @investigation.investigation_notes %>
+        <% for note in @investigation.investigation_notes %>
           <li>
-            <%= investigation_note.date %>
-            <%= link_to investigation.officer.name, officer_path(investigation.officer) %>
-            <%= investigation_note.content %>
+            <%= note.date %>
+            <%= link_to note.officer.name, officer_path(note.officer) %>
+            <%= note.content %>
           </li>
         <% end %>
       </ul>

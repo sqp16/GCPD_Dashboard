@@ -4,16 +4,18 @@
 ////////////////////////////////////////////////
 var investigation_notes;
 
-function run_ajax(method, data, link, callback=function(res){investigation_notes.get_investigation_notes()}){
+function run_ajax(method, data, link, callback=function(res){investigation_note.get_investigation_notes()}){
   $.ajax({
     method: method,
     data: data,
     url: link,
     success: function(res) {
-      investigation_notes.errors = {};
+      investigation_note.errors = {};
+
       callback(res);
     },
     error: function(res) {
+      alert("error");
       console.log("error");
       investigation_notes.errors = res.responseJSON;
     }
@@ -30,9 +32,9 @@ function run_ajax(method, data, link, callback=function(res){investigation_notes
       // _or_ (2) define it directly in the js file as such:
       template:`
         <li>
-          {{ investigation_note.date }}:&nbsp;&nbsp;
-          {{ investigation_note.officer }}:&nbsp;&nbsp;
-          {{ investigation_note.content }}:&nbsp:&nbsp;
+          {{ investigation_note.date }}&nbsp;&nbsp;
+          {{ investigation_note.officer_id }}:&nbsp;&nbsp;
+          {{ investigation_note.content }}
         </li>
       `,
       // Passed elements to the component from the Vue instance
@@ -83,6 +85,7 @@ var new_form = Vue.component('new-investigation-note-form', {
   },
 })
 
+
 //////////////////////////////////////////
 ////***  The Vue instance itself  ***////
 /////////////////////////////////////////
@@ -109,8 +112,8 @@ var investigation_note = new Vue({
     },
 
     get_investigation_notes: function(){
-      run_ajax('GET', {}, '/investigations/'.concat(this.investigation_id, '/investigation_notes.json'), function(res){investigation_notes.investigation_notes = res});
-    }
+      run_ajax('GET', {}, '/investigations/'.concat(this.investigation_id, '/investigation_notes.json'), function(res){investigation_note.investigation_notes = res});
+    },
   },
 
   mounted: function(){
