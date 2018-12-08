@@ -6,7 +6,7 @@
       <div class="row">
         <div class="form-inputs">
           <%= f.input :officer_id, collection: (Officer.active.alphabetical.to_a - @investigation_officers), include_blank: true %>
-          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation_id } %>
+          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
           <%= f.input :from, as: :hidden, input_html: { value: "investigation" } %>
         </div>
       </div>
@@ -17,6 +17,7 @@
       </div>
     <% end %>
   </div>
+  
   <div class="col s5">
     <div class="card">
     <div class="card-content">
@@ -52,7 +53,7 @@
             <th>Unit</th>
             <th>Starting</th>
           </thead>
-            <% for assignment in @investigation.assignments %>
+            <% for assignment in @investigation.assignments.current %>
               <tr>
                 <td><%= link_to assignment.officer.proper_name, officer_path(assignment.officer) %></td>
                 <td><%= link_to assignment.officer.unit.name, unit_path(assignment.officer.unit) %></td>

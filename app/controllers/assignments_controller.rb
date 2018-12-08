@@ -18,11 +18,21 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new(assignment_params)
     @assignment.start_date = Date.current
     if @assignment.save
-      flash[:notice] = "Successfully assigned '#{@assignment.officer.proper_name}' to '#{@assignment.investigation.title}'."
-      redirect_to officer_path(@assignment.officer)
+      if params[:assignment][:from] == 'officer'
+        flash[:notice] = "Successfully assigned '#{@assignment.officer.proper_name}' to '#{@assignment.investigation.title}'."
+        redirect_to officer_path(@assignment.officer)
+      elsif params[:assignment][:from] == 'investigation'
+        flash[:notice] = "Successfully assigned '#{@assignment.officer.proper_name}' to '#{@assignment.investigation.title}'."
+        redirect_to investigation_path(@assignment.investigation)
+      end
     else
-      @officer = Officer.find(params[:assignment][:officer_id])
-      render action: 'new', locals: { officer: @officer }
+      if params[:assignment][:from] == 'officer'
+        @officer = Officer.find(params[:assignment][:officer_id])
+        render action: 'new', locals: { officer: @officer }
+      elsif params[:assignment][:from] == 'investigation'
+        @investigation = Investigation.find(params[:assignment][:investigation_id])
+        render action: 'new', locals: { investigation: @investigation }
+      end
     end
   end
 

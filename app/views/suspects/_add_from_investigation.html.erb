@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col s7">
+    <h4>Adding suspect to <%= @investigation.title%></h4>
+    <%= simple_form_for(@suspect) do |f| %>
+      <%= f.error_notification %>
+      <div class="row">
+        <div class="form-inputs">
+          <%= f.input :suspect_id, collection: (Criminal.active.alphabetical.to_a - @investigation_criminals), include_blank: true %>
+          <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation_id } %>
+          <%= f.input :from, as: :hidden, input_html: { value: "investigation" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-actions col s8">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="col s5">
+    <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Suspects</span>
+        <table class="lined">
+          <thead>
+            <th>Criminal</th>
+            <th>Enhanced Being?</th>
+            <th>Starting</th>
+          </thead>
+            <% for suspect in @investigation.suspects.active %>
+              <tr>
+                <td><%= link_to suspect.criminal.proper_name (suspect.criminal.aka), suspect_path(suspect.criminal) %></td>
+                <td><%= suspect.criminal.enhanced_being? "Yes":"No" %></td>
+                <td><%= assignment.added_on.strftime("%m/%d/%y") %></td>
+              </tr>
+            <% end %>
+        </table>
+      </div>
+    </div>
+</div>

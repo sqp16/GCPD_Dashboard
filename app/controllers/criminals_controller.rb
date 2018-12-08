@@ -9,7 +9,7 @@ class CriminalsController < ApplicationController
     end
     
     def show
-        @current_suspect_in = @criminal.investigations.alphabetical
+        @current_suspect_in = @criminal.suspects
     end
     
     def new

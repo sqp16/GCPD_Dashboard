@@ -1,0 +1,35 @@
+<% unless @current_suspects.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Suspects</span>
+      <table class="lined">
+        <thead>
+          <th>Criminal</th>
+          <th>Starting</th>
+        </thead>
+          <% for suspect in @current_suspects %>
+            <tr>
+              <td>
+                &nbsp;<%= link_to suspect.criminal.name (suspect.criminal.aka), criminal_path(suspect.criminal) %>
+              </td>
+              <td><%= suspect.criminal.enhanced being ? "Yes":"No" %></td>
+              <td><%= suspect.added_on.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+      <% if can? :new, Suspect %>
+        <div class="card-action">
+          <%= link_to "Add a new suspect", new_suspect_path(investigation_id: @investigation.id) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else%>
+  <% if can? :new, Suspect %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new suspect", new_suspect_path(investigation_id: @investigation.id) %>
+      </div>
+    </div>
+  <% end %>
+<% end%>

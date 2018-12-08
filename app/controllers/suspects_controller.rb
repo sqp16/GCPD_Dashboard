@@ -1,4 +1,4 @@
-class AssignmentsController < ApplicationController
+class SuspectsController < ApplicationController
     before_action :check_login
     
     def new
@@ -13,7 +13,7 @@ class AssignmentsController < ApplicationController
             @investigation_criminals = @investigation.criminals.map{|c| c.id}
         end
     end
-    
+  
     def create
         @suspect = Suspect.new(suspect_params)
         @suspect.added_on = Date.current

@@ -21,23 +21,25 @@
   <div class="col s5">
     <div class="card">
     <div class="card-content">
-     <span class="card-title">Current Suspect In</span>
+     <span class="card-title">Current Suspect</span>
         <table class="lined">
           <thead>
             <th>Case</th>
             <th>Starting</th>
           </thead>
-            <% for a in @officer.assignments.current %>
+            <% for suspect in @criminal.suspects.current %>
               <tr>
                 <td>
-                  <% if can? :terminate, Assignment %>
-                    <%= link_to(terminate_assignment_path(assignment, from: "officer"), class: 'remove', method: :patch) do %>
+                  <% if can? :remove, Suspect %>
+                    <%= link_to(remove_suspect_path(suspect, from: "criminal"), class: 'remove', method: :patch) do %>
                       x&nbsp;&nbsp;
                     <% end %>
                   <% end %>
-                  &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+                  
+                  <!--Why can't it find investigation????-->
+                  &nbsp;<%= link_to suspect.investigation.title, investigation_path(suspect.investigation) %>
                 </td>
-                <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+                <td><%= suspect.added_on.strftime("%m/%d/%y") %></td>
               </tr>
             <% end %>
         </table>

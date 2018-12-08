@@ -1,25 +1,44 @@
-<% if @current_suspect_in.empty? %>
-  <h5>Not currently a suspect in any case.</h5>
-<% else%>
-
-  <div class="card grey lighten-3">
+<% unless @current_suspect_in.empty? %>
+  <div class="card">
     <div class="card-content">
-      <span class="card-title">Currently a Suspect in: </span>
+      <span class="card-title">Current Suspects</span>
       <table class="lined">
         <thead>
           <th>Case</th>
-          <th>Open</th>
+          <th>Starting</th>
         </thead>
-          <% for invest in @current_suspect_in %>
+          <% for suspect in @current_suspect_in %>
             <tr>
-              <td>&nbsp;<%= link_to criminal.investigation.title, investigation_path(criminal.investigation) %></td>
               <td>
-                <%= invest.open %>
+                <% if can? :remove, Suspect %>
+                  <%= link_to(remove_suspect_path(suspect, from: "criminal"), class: 'remove', method: :patch) do %>
+                    x&nbsp;&nbsp;
+                  <% end %>
+                <% end %>
+                &nbsp;<%= link_to suspect.investigation.title, investigation_path(suspect.investigation) %>
               </td>
-              
+              <td><%= suspect.added_on.strftime("%m/%d/%y") %></td>
             </tr>
           <% end %>
       </table>
+      
+      <% if can? :new, Suspect %>
+        <div class="card-action">
+          <%= link_to "Add a new suspect", new_suspect_path(suspect_id: suspect.id) %>
+        </div>
+      <% end %>
+    
     </div>
   </div>
+<% else%>
+  <h5>Not currently a suspect in any case.</h5>
+  
+  <% if can? :new, Suspect %>
+    <div class="card grey lighten-3">
+      <div class="card-action">
+        <%= link_to "Add a new suspect", new_suspect_path(criminal_id: @criminal.id) %>
+      </div>
+    </div>
+  <% end %>
+  
 <% end%>

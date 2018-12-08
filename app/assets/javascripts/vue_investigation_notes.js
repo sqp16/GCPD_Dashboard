@@ -11,13 +11,11 @@ function run_ajax(method, data, link, callback=function(res){investigation_note.
     url: link,
     success: function(res) {
       investigation_note.errors = {};
-
       callback(res);
     },
     error: function(res) {
-      alert("error");
       console.log("error");
-      investigation_notes.errors = res.responseJSON;
+      investigation_note.errors = res.responseJSON;
     }
   })
 }
