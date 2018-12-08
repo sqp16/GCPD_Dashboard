@@ -1,0 +1,23 @@
+<% unless @enhanced_criminals.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Enhanced Criminals</span>
+      <table class="lined">
+        <thead>
+          <th>Criminal</th>
+          <th>Aka</th>
+          <th>Convicted Felon?</th>
+        </thead>
+          <% for criminal in @enhanced_criminals %>
+            <tr>
+              <td>&nbsp;<%= link_to criminal.proper_name, criminal_path(criminal) %></td>
+              <td><%= criminal.aka %></td>
+              <td><%= criminal.convicted_felon ? "Yes" : "No" %></td>
+              
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% end%>
+<br />

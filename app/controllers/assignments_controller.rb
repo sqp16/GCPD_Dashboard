@@ -3,7 +3,7 @@ class AssignmentsController < ApplicationController
 
   def new
     @assignment = Assignment.new
-    @active_officers = Officer.active.alphabetical.map{|o| o}
+    @active_officers = Officer.active.alphabetical.paginate(page: params[:page]).per_page(5)
     unless params[:officer_id].nil?
       @officer = Officer.find(params[:officer_id])
       @officer_investigations = @officer.assignments.current.map{|a| a.investigation }

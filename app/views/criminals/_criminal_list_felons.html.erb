@@ -3,33 +3,34 @@
 <% if criminals.empty? %>
   <p>There are no <%= state.downcase %> criminals at this time.</p>
 <% else %>
- 
-  <table id="customTable">
-    <thead>
-      <th>Name</th> 
-      <th>Aka</th>
-      <th>Enhanced Being?</th>    
-
-      <th class="align_center">Edit</th>
-    </thead>
-    <% for criminal in criminals %>
-      <tr>
-        <td><%= link_to criminal.proper_name, criminal_path(criminal) %></td>
-        <% if criminal.aka == nil? %>
-          <td><p>No aka</p></td>
-        <% else %>
-          <td><%= criminal.aka %></td>
-        <% end %>
-        <td><%= criminal.enhanced_powers ? "Yes" : "No" %></td>
-
-        <td class="align_center">
-          <%= link_to edit_criminal_path(criminal) do %>
-              <i class="material-icons">edit</i>
+  <div id="whitebox">
+    <table id="customTable">
+      <thead>
+        <th>Name</th> 
+        <th>Aka</th>
+        <th>Enhanced Being?</th>    
+  
+        <th class="align_center">Edit</th>
+      </thead>
+      <% for criminal in criminals %>
+        <tr>
+          <td><%= link_to criminal.proper_name, criminal_path(criminal) %></td>
+          <% if criminal.aka == nil? %>
+            <td><p>No aka</p></td>
+          <% else %>
+            <td><%= criminal.aka %></td>
           <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+          <td><%= criminal.enhanced_powers ? "Yes" : "No" %></td>
+  
+          <td class="align_center">
+            <%= link_to edit_criminal_path(criminal) do %>
+                <i class="material-icons">edit</i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   <p class="supertiny"></p>
   <br />
   <%= will_paginate criminals, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>

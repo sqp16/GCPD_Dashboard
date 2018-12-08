@@ -35,8 +35,6 @@
                       x&nbsp;&nbsp;
                     <% end %>
                   <% end %>
-                  
-                  <!--Why can't it find investigation????-->
                   &nbsp;<%= link_to suspect.investigation.title, investigation_path(suspect.investigation) %>
                 </td>
                 <td><%= suspect.added_on.strftime("%m/%d/%y") %></td>

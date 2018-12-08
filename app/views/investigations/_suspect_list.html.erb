@@ -5,14 +5,17 @@
       <table class="lined">
         <thead>
           <th>Criminal</th>
+          <th>Aka</th>
+          <th>Enhanced Powers?</th>
           <th>Starting</th>
         </thead>
           <% for suspect in @current_suspects %>
             <tr>
               <td>
-                &nbsp;<%= link_to suspect.criminal.name (suspect.criminal.aka), criminal_path(suspect.criminal) %>
+                &nbsp;<%= link_to suspect.criminal.proper_name, criminal_path(suspect.criminal) %>
               </td>
-              <td><%= suspect.criminal.enhanced being ? "Yes":"No" %></td>
+              <td><%= suspect.criminal.aka%></td>
+              <td><%= suspect.criminal.enhanced_powers ? "Yes":"No" %></td>
               <td><%= suspect.added_on.strftime("%m/%d/%y") %></td>
             </tr>
           <% end %>

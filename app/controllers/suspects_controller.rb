@@ -22,10 +22,17 @@ class SuspectsController < ApplicationController
                 flash[:notice] = "Successfully added '#{@suspect.criminal.proper_name}' to '#{@suspect.investigation.title}'."
                 redirect_to criminal_path(@suspect.criminal)
             elsif params[:suspect][:from] == 'investigation'
-            
+                flash[:notice] = "Successfully added '#{@suspect.criminal.proper_name}' to '#{@suspect.investigation.title}'."
+                redirect_to investigation_path(@suspect.investigation)
+            end
         else
-            @criminal = Criminal.find(params[:suspect][:criminal_id])
-            render action: 'new', locals: { criminal: @criminal }
+            if params[:suspect][:from] == 'criminal'
+                @criminal = Criminal.find(params[:suspect][:criminal_id])
+                render action: 'new', locals: { criminal: @criminal }
+            elsif params[:suspect][:from] == 'investigation'
+                @investigation = Investigation.find(params[:suspect][:investigation_id])
+                render action: 'new', locals: { investigation: @investigation }
+            end
         end
     end
     
