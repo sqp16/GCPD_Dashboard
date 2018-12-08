@@ -26,15 +26,15 @@ function run_ajax(method, data, link, callback=function(res){investigation_note.
  Vue.component('investigation-note-row', {
       // Start with the template: two methods to consider...
       // (1) defining where to look for the HTML template in the index view
-      // template: '#investigation-note-row',
+      template: '#investigation-note-row',
       // _or_ (2) define it directly in the js file as such:
-      template:`
-        <li>
-          {{ investigation_note.date }}&nbsp;&nbsp;
-          {{ investigation_note.officer_id }}:&nbsp;&nbsp;
-          {{ investigation_note.content }}
-        </li>
-      `,
+      // template:`
+      //   <li>
+      //     {{ investigation_note.date }}&nbsp;&nbsp;
+      //     {{ investigation_note.officer_id }}:&nbsp;&nbsp;
+      //     {{ investigation_note.content }}
+      //   </li>
+      // `,
       // Passed elements to the component from the Vue instance
       props: {
         investigation_note: Object

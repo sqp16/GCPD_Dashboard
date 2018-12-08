@@ -18,8 +18,11 @@ class SuspectsController < ApplicationController
         @suspect = Suspect.new(suspect_params)
         @suspect.added_on = Date.current
         if @suspect.save
-            flash[:notice] = "Successfully added '#{@suspect.criminal.proper_name}' to '#{@suspect.investigation.title}'."
-            redirect_to criminal_path(@suspect.criminal)
+            if params[:suspect][:from] == 'criminal'
+                flash[:notice] = "Successfully added '#{@suspect.criminal.proper_name}' to '#{@suspect.investigation.title}'."
+                redirect_to criminal_path(@suspect.criminal)
+            elsif params[:suspect][:from] == 'investigation'
+            
         else
             @criminal = Criminal.find(params[:suspect][:criminal_id])
             render action: 'new', locals: { criminal: @criminal }

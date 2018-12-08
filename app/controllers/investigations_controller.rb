@@ -36,7 +36,7 @@ class InvestigationsController < ApplicationController
   end
   
   def investigation_notes
-    @investigation_notes = @investigation.investigation_notes
+    @investigation_notes = @investigation.investigation_notes.to_a.map {|note| {note: note, officer: note.officer, url: officer_path(note.officer)}}
   end
   
     #New Search Function

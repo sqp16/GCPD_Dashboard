@@ -35,10 +35,9 @@ class CriminalsController < ApplicationController
           flash[:notice] = "Successfully removed '#{@criminal.proper_name}'."
           redirect_to criminals_url
         else
-          render action: 'show'
+            render action: 'show'
         end
     end
-
     
     def update
         respond_to do |format|
