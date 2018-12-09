@@ -164,6 +164,7 @@ th.align_center {
 input[type=text].search {
   border-bottom: none;
   margin-left: 10px;
+  background-color: #00001b;
 }
 
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
@@ -360,3 +361,4 @@ li.no_bullet {
 #customYellow{
    background-color: #ffd600 !important;
 }
+

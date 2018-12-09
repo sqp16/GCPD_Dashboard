@@ -58,8 +58,11 @@ class CriminalsController < ApplicationController
         @criminals = Criminal.search(@query)
         @total_hits = @criminals.size
         if @total_hits == 0
-          flash[:error] = "There are no criminals found with the term #{@query}."
+          flash[:error] = "There are no criminals found with the term '#{@query}'."
           redirect_back(fallback_location: @criminals) 
+        elsif @total_hits == 1
+            flash[:notice] = "Your search '#{@query}' resulted in 1 hit in criminals."
+            redirect_to @criminals[0]
         end
     end
     

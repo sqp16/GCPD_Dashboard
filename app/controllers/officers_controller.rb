@@ -70,8 +70,11 @@ class OfficersController < ApplicationController
     @officers = Officer.search(@query)
     @total_hits = @officers.size
     if @total_hits == 0
-      flash[:error] = "There are no officers found with the term #{@query}."
+      flash[:error] = "There are no officers found with the term '#{@query}'."
       redirect_back(fallback_location: @officers) 
+    elsif @total_hits == 1
+      flash[:notice] = "Your search '#{@query}' resulted in 1 hit in the officers."
+      redirect_to @officers[0]
     end
   end
   

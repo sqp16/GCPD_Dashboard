@@ -51,6 +51,9 @@ class InvestigationsController < ApplicationController
     if @total_hits == 0
       flash[:error] = "There are no investigations found with the term '#{@query}'."
       redirect_back(fallback_location: @investigations) 
+    elsif @total_hits == 1
+      flash[:notice] = "Your search '#{@query}' resulted in 1 hit in investigations."
+      redirect_to @investigations[0]
     end
   end
   

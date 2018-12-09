@@ -49,6 +49,9 @@ $(document).ready(function() {
         submitForm();
     }
   }
+  $("#search-button").click(function() {
+    submitForm();
+  })
 });
 
 
