@@ -24,7 +24,7 @@
       
       <% if can? :new, Suspect %>
         <div class="card-action">
-          <%= link_to "Add a new suspect", new_suspect_path(suspect_id: suspect.id) %>
+          <%= link_to "Add a new suspect", new_suspect_path(criminal_id: @criminal.id) %>
         </div>
       <% end %>
     
