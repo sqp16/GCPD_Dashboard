@@ -40,7 +40,13 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     @assignment.end_date = Date.current
     @assignment.save
-    flash[:notice] = "'#{@assignment.officer.proper_name}' is no longer assignmed to '#{@assignment.investigation.title}'."
+    if params[:from] == 'officer'
+      flash[:notice] = "'#{@assignment.officer.proper_name}' is no longer assignmed to '#{@assignment.investigation.title}'."
+      redirect_to officer_path(@assignment.officer)
+    elsif params[:from] == 'investigation'
+      flash[:notice] = "'#{@assignment.officer.proper_name}' is no longer assignmed to '#{@assignment.investigation.title}'."
+      redirect_to investigation_path(@assignment.investigation)
+    end   
   end
 
   private

@@ -10,7 +10,7 @@ class SuspectsController < ApplicationController
         end
         unless params[:investigation_id].nil?
             @investigation = Investigation.find(params[:investigation_id])
-            @investigation_criminals = @investigation.criminals.map{|c| c.id}
+            @investigation_criminals = @investigation.suspects.current.map{|s| s.criminal}
         end
     end
   
@@ -40,7 +40,13 @@ class SuspectsController < ApplicationController
         @suspect = Suspect.find(params[:id])
         @suspect.dropped_on = Date.current
         @suspect.save
-        flash[:notice] = "#{@suspect.criminal.proper_name} is no longer a suspect in '#{@suspect.investigation.title}'."
+        if params[:from] == 'criminal'
+            flash[:notice] = "#{@suspect.criminal.proper_name} is no longer a suspect in '#{@suspect.investigation.title}'."
+            redirect_to criminal_path(@suspect.criminal)
+        elsif params[:from] == 'investigation'
+            flash[:notice] = "#{@suspect.criminal.proper_name} is no longer a suspect in '#{@suspect.investigation.title}'."
+            redirect_to investigation_path(@suspect.investigation)
+        end
     end
     
     private

@@ -7,11 +7,16 @@
           <th>Criminal</th>
           <th>Aka</th>
           <th>Enhanced Powers?</th>
-          <th>Starting</th>
+          <th>Added on</th>
         </thead>
           <% for suspect in @current_suspects %>
             <tr>
               <td>
+                <% if can? :remove, Suspect %>
+                  <%= link_to(remove_suspect_path(suspect, from: "investigation"), class: 'remove', method: :patch) do %>
+                    x&nbsp;&nbsp;
+                  <% end %>
+                <% end %>
                 &nbsp;<%= link_to suspect.criminal.proper_name, criminal_path(suspect.criminal) %>
               </td>
               <td><%= suspect.criminal.aka%></td>

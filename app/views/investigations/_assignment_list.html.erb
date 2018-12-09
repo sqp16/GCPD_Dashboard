@@ -5,11 +5,17 @@
       <table class="lined">
         <thead>
           <th>Officer</th>
+          <th>Unit</th>
           <th>Starting</th>
         </thead>
           <% for assignment in @current_assignments %>
             <tr>
               <td>
+                <% if can? :terminate, Assignment %>
+                  <%= link_to(terminate_assignment_path(assignment, from: "investigation"), class: 'remove', method: :patch) do %>
+                    x&nbsp;&nbsp;
+                  <% end %>
+                <% end %>
                 &nbsp;<%= link_to assignment.officer.proper_name, officer_path(assignment.officer) %>
               </td>
               <td><%= assignment.officer.unit.name%></td>

@@ -12,6 +12,7 @@ class InvestigationsController < ApplicationController
 
   def show
     @current_assignments = @investigation.assignments.current.by_officer
+    @past_assignments = @investigation.assignments.past.by_officer
     @current_suspects = @investigation.suspects.current.alphabetical.to_a
     @previous_suspects = @investigation.suspects.alphabetical.to_a - @current_suspects
     @case_crimes = @investigation.crimes.alphabetical.to_a

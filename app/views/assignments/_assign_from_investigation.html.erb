@@ -18,6 +18,7 @@
     <% end %>
   </div>
   
+  <!--Generating a list of officers with no assignments in the system -->
   <div class="col s5">
     <div class="card">
     <div class="card-content">
@@ -27,11 +28,8 @@
             <th>Officer</th>
             <th>Unit</th>
           </thead>
-          
-          <!--I NEED HELP HERE-->
             <% for officer in @active_officers %>
               <tr>
-                <!--@officer = Officer.find(params[:officer])-->
                 <% if officer.assignments.count == 0 %>
                   <td><%= link_to officer.proper_name, officer_path(officer) %></td>
                   <td><%= link_to officer.unit.name, unit_path(officer.unit) %></td>

@@ -1,0 +1,27 @@
+<% unless @past_assignments.empty? %>
+  <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">Past Assignments</span>
+      <table class="lined">
+        <thead>
+          <th>Officer</th>
+          <th>Unit</th>
+          <th>Started</th>
+          <th>Terminated</th>
+        </thead>
+          <% for assignment in @past_assignments %>
+            <tr>
+              <td>
+                &nbsp;<%= link_to assignment.officer.proper_name, officer_path(assignment.officer) %>
+              </td>
+              <td><%= assignment.officer.unit.name%></td>
+              <td><%= assignment.start_date.strftime("%m/%d/%y") %></td>
+              <td><%= assignment.end_date.strftime("%m/%d/%y") %></td>
+            </tr>
+          <% end %>
+      </table>
+    </div>
+  </div>
+<% else%>
+    <h5>No past assignments</h5>
+<% end%>
