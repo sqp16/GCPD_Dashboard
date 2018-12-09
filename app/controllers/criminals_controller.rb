@@ -1,6 +1,6 @@
 class CriminalsController < ApplicationController
     before_action :set_criminal, only: [:show, :edit, :update, :destroy]
-    # before_action :check_login
+    before_action :check_login
     
     def index
         @all_criminals = Criminal.alphabetical.paginate(page: params[:crim_page]).per_page(10)
@@ -9,7 +9,8 @@ class CriminalsController < ApplicationController
     end
     
     def show
-        @current_suspect_in = @criminal.suspects
+        @current_suspect_in = @criminal.suspects.current
+        @prev_suspect = @criminal.suspects - @criminal.suspects.current
     end
     
     def new
