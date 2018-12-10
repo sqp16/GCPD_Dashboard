@@ -39,6 +39,13 @@ $(document).ready(function() {
   jQuery(".best_in_place").best_in_place();
 });
 
+// submits form on change for active/inactive toggli
+$(function() {
+  $(".auto_submit_form").change(function() {
+    this.submit();
+  });
+});
+
 // Search submit on enter
 $(document).ready(function() {
   function submitForm() {

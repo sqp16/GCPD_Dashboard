@@ -41,7 +41,7 @@ class InvestigationsController < ApplicationController
   end
   
   def crime_investigations
-    @crime_investigations = @investigation.crime_investigations.to_a.map {|crime| {crime: crime.crime}}
+    @crime_investigations = CrimeInvestigation.for_investigation(@investigation.id).joins(:crime).select('crime_investigations.*, crimes.name as crime_name')
   end
   
     #New Search Function

@@ -10,25 +10,32 @@
         <th>Crime</th>
         <th>Level</th>
   
-  
-        <th class="align_center">Edit</th>
+        <% if can? :edit, Crime %>
+          <th class="align_center">Status</th>
+          <th class="align_center">Edit</th>
+        <% end %> 
       </thead>
     <% for crime in crimes %>
       <tr>
         <td><%= crime.name %></td>
         <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
-
-
-
-
-
-
-          <td class="align_center">
-            <%= link_to edit_crime_path(crime) do %>
-                <i class="material-icons">edit</i>
+         <% if can? :edit, crime %>
+          <td id="auto_submit_form">
+            <%= simple_form_for(crime) do |f| %>
+              <div class="row">
+                <div class="form-inputs">
+                  <%= f.input :active %>
+                </div>
+              </div>
             <% end %>
           </td>
-        </tr>
+          <td class="align_center">
+          <%= link_to edit_crime_path(crime) do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+          </td>
+        <% end %>
+      </tr>
       <% end %>
     </table>
   </div>

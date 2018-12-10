@@ -1,7 +1,9 @@
 <!--Only have a button to close investigation if it is still open-->
-<% if @investigation.date_closed.nil? %>
-  <td class="align_center">
-  <%= link_to close_investigation_path(@investigation), method: :patch do %>
-      <i class='waves-effect waves-light btn-alert'>Close Now</i>
+<% if can? :show, investigation %>
+  <% if @investigation.date_closed.nil? %>
+    <td class="align_center">
+    <%= link_to close_investigation_path(@investigation), method: :patch do %>
+        <i class='waves-effect waves-light btn-alert'>Close Now</i>
+    <% end %>
   <% end %>
-<% end %>
+<% end %> 

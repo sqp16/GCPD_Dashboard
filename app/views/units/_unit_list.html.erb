@@ -10,19 +10,28 @@
 
       <th class="align_center">Number of Active Officers</th>
       <th class="align_center">Number of Current Investigations</th>
-      <th class="align_center">Edit</th>
+      <% if can? :edit, Unit %>
+        <th class="align_center">Edit</th>
+      <% end %>
     </thead>
     <% for unit in units %>
       <tr>
         <!-- <td><%# best_in_place unit, :name, as: :input %></td> -->
-        <td><%= link_to unit.name, unit_path(unit) %></td>
+        <% if can? :show, unit %>
+          <td><%= link_to unit.name, unit_path(unit) %></td>
+        <% else %>
+          <td><%= unit.name %></td>
+        <% end %>
         <td><%= unit.number_of_active_officers%></td>
         <td><%= unit.number_of_unique_open_investigations%></td>
-        <td class="align_center">
+        <% if can? :edit, unit %>
+          <td class="align_center">
           <%= link_to edit_unit_path(unit) do %>
             <i class="material-icons">edit</i>
           <% end %>
-        </td>
+          </td>
+        <% end %>
+        
       </tr>
     <% end %>
   </table>

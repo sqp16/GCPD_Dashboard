@@ -53,7 +53,7 @@ class Ability
             can :manage, Criminal
             can :manage, Suspect
             
-            #can manage officer info 
+            #can manage own officer info 
             can :manage, Officer do |o|
                 o.id == user.officer.id
             end
@@ -65,6 +65,7 @@ class Ability
             
             can :index, Unit
             
+            #can access show page for own unit...
             can :show, Unit do |u|
                 u.id == user.officer.unit.id
             end
