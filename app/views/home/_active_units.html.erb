@@ -1,0 +1,36 @@
+<div class="card">
+ <div class="card-content">
+  <span class="card-title">Active Units</span>
+  <!--expandable table of officers curr assignments-->
+   <table class="lined">
+       <thead>
+           <th>Unit Name</th>
+           <th>Number of Active Officers</th>
+           <th>Number of Open Investigations</th>
+           <th class="align_center">Edit</th>
+       </thead>
+     <% for unit in @units %>
+      <tr>
+        <% if can? :read, unit %>
+          <td><%= link_to unit.name, unit_path(unit) %></td>
+        <% else %>
+          <td><%= unit.name %></td>
+        <% end %>
+        <td><%= unit.number_of_active_officers%></td>
+        <td><%= unit.number_of_unique_open_investigations%></td>
+        
+        <% if can? :edit, @units %>
+          <td><div class='btn'><%= best_in_place unit, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;</td>
+          <td class="align_center">
+            <%= link_to edit_unit_path(unit) do %>
+              <i class="material-icons">edit</i></td>
+            <% end %>
+        <% end %>
+        
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+  <%      
+</div>
+</div>

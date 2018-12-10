@@ -3,6 +3,8 @@ class HomeController < ApplicationController
 
   def index
     @my_notes = @current_user.officer.investigation_notes.paginate(page: params[:my_notes_page]).per_page(10)
+    @units = Unit.alphabetical.active.paginate(page: params[:page]).per_page(5)
+    @officers = Officer.alphabetical.active.paginate(page: params[:page]).per_page(5)
   end
 
   def about

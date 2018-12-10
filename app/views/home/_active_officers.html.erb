@@ -1,0 +1,47 @@
+<div class="card">
+ <div class="card-content">
+  <span class="card-title">Active Officers</span>
+  <!--expandable table of officers curr assignments-->
+   <table class="lined">
+       <thead>
+           <th>Officer Name</th>
+           <th>Rank</th>
+           <th>Unit</th>
+           <% if can? :edit, @officers %>
+               <th class="align_center">Edit</th>
+            <% end %>
+       </thead>
+     <% for officer in @officers %>
+      <tr>
+        <% if can? :read, officer%>
+          <td><%= link_to officer.proper_name ,officer_path(officer) %></td>
+        <% else %>
+            <td><%= officer.proper_name %></td>
+        <% end %>
+        <% if can? :read, officer%>
+          <td><%= link_to officer.unit.name,officer_path(officer.unit) %></td>
+        <% else %>
+            <td><%= officer.unit.name %></td>
+        <% end %>
+        <td><%= officer.rank %></td>
+       
+        <% if can? :edit, @officers %>
+          <td><div class='btn'><%= best_in_place officer, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;</td>
+          <td class="align_center">
+            <%= link_to edit_officer_path(officer) do %>
+              <i class="material-icons">edit</i></td>
+            <% end %>
+        <% end %>
+        
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+   <% if can? :new, Officer %>
+      <div class="card ">
+        <div class="card-action">
+        <%= link_to "Add a new officer", new_officer_path %>
+     </div>
+   <% end %>    
+</div>
+</div>
