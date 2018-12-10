@@ -1,15 +1,7 @@
-<!--<ul id="dropdown1" class="dropdown-content">-->
-<!--  <li><a href="#!">one</a></li>-->
-<!--  <li><a href="#!">two</a></li>-->
-<!--  <li class="divider"></li>-->
-<!--  <li><a href="#!">three</a></li>-->
-<!--</ul>-->
-
   <div class='navbar-fixed'>
     <nav>
       <div class="nav-wrapper white">
-        <!--<a href class="brand-logo black-text small"><%= image_tag "GCPD_Logo.png" %>GCPD Dashboard</a>-->
-        <a href="#!" class="brand-logo black-text"><img src="images/GCPD_Logo.png">GCPD Dashboard</a>
+        <a href="#!" class="brand-logo black-text bold" style="padding-top:5px; padding-left:10px"><%= image_tag "GCPD_Logo.png" %>Gotham City Police Department</a>
         <ul class="right hide-on-med-and-down">
           <li><%= link_to 'HOME', home_path, {:style=>'color:#80cbc4;', :class => "css_class"} %></li>
           <li><%= link_to 'MY PROFILE', officer_path(current_user.officer), {:style=>'color:#80cbc4;', :class => "css_class"}%></li>
