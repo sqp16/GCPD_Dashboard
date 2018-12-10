@@ -1,13 +1,12 @@
 <div class="card">
  <div class="card-content">
   <span class="card-title">Active Crimes</span>
-  <!--expandable table of officers curr assignments-->
    <table class="lined">
        <thead>
            <th>Crime Name</th>
            <th>Offense</th>
            <th>Number of Investigations: </th>
-           <% if can? :edit, @officers %>
+           <% if can? :edit, @crimes %>
                 <th>Active?</th>
                <th class="align_center">Edit</th>
             <% end %>

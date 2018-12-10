@@ -1,0 +1,35 @@
+<div class="card">
+ <div class="card-content">
+  <span class="card-title">Longest</span>
+    <span class="card-title">Unit Investigations</span>
+   <table class="lined">
+       <thead>
+           <th>Title</th>
+           <th>Days Open</th>
+           <th>Number of Crimes </th>
+           <% if can? :edit, @unit_investigations %>
+               <th class="align_center">Edit</th>
+            <% end %>
+       </thead>
+     <% for invest in @unit_investigations %>
+          <tr>
+            <td><%= invest %></td>
+            <td><%= Date.today - invest.start_opened %></td>
+            <td><%= CrimeInvestigation.for_investigation(invest).count%></td>
+            <td>
+                <%= link_to edit_investigation_path(investigation) do %>
+                  <i class="material-icons">edit</i>
+                <% end %>
+            </td>
+             </tr>
+    <% end %>
+  </table>
+</div>
+    <% if can? :new, Investigation %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+        <%= link_to "Add a new investigation", new_investigation_path %>
+     </div>
+    </div>
+   <% end %>  
+</div>

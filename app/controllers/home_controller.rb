@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @my_unit = @current_user.officer.unit
     @my_officers= @current_user.officer.unit.officers.active.alphabetical.paginate(page: params[:page]).per_page(5)
     @crimes = Crime.alphabetical.active.paginate(page: params[:page]).per_page(5)
+    @unit_investigations = @current_user.officer.unit.officers.map{|a| a.assignments}
   end
 
   def about
