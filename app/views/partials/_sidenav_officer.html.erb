@@ -6,6 +6,8 @@
       <a href="#email"><span class=" center indigo-text text-lighten-3 email"><%= current_user.officer.rank%> <%= current_user.officer.proper_name %></span></a>
     </div></li>
       <li><div class="divider"></div></li>
+      <li><%= link_to 'MY INVESTIGATION NOTES', investigation_notes_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
+      <li><div class="divider"></div></li>
       <li><%= link_to 'INVESTIGATIONS LIST', investigations_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>
       <li><div class="divider"></div></li>
       <li><%= link_to 'UNITS LIST', units_path, {:style=>'color:#FFFFFF;', :class => "css_class"}%></li>

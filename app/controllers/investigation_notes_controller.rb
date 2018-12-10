@@ -5,7 +5,9 @@ class InvestigationNotesController < ApplicationController
     def new
         @investigation_note = InvestigationNote
         @officer = @current_user.officer
-        @investigation = Investigation.find(params[:investigation_id])
+        unless params[:investigation_id].nil?
+            @investigation = Investigation.find([:investigation_id])
+        end
     end 
     
     def create
@@ -14,9 +16,14 @@ class InvestigationNotesController < ApplicationController
             flash[:notice] = "Successfully added investigation note."
             redirect_to investigation_path(@investigation_note.investigation)
         else
-            @investigation = Investigation.find(params[:investigation_note][:investigation_id])
-            @officer = @current_user.officer
-            render action: 'new', locals: { investigation: @investigation, officer: @officer }
+            if params[:investigation_note][:from] == 'investigation'
+                @investigation = Investigation.find([:investigation_id])
+                render action: 'new', locals: { investigation: @investigation }
+            else
+                @investigation = Investigation.find(params[:investigation_note][:investigation_id])
+                @officer = @current_user.officer
+                render action: 'new', locals: { investigation: @investigation, officer: @officer }
+            end
         end
     end
     
