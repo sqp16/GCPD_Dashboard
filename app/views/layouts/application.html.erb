@@ -14,14 +14,17 @@
   <body>
     <!-- Partials for the topbar and navigation -->
     <header>
-    <% if logged_in? && ( current_user.role?(:commish) || current_user.role?(:chief) ) %>
-      <%= render :partial => "partials/nav" %>
+    <% if logged_in? && current_user.role?(:commish) %>
+      <%= render :partial => "partials/topnav" %>
       <%= render :partial => "partials/sidenav" %>
+    <% elsif logged_in? && current_user.role?(:chief) %>
+      <%= render :partial => "partials/topnav" %>
+      <%= render :partial => "partials/sidenav_chief" %>
     <% elsif logged_in? && current_user.role?(:officer) %>
-      <%= render :partial => "partials/nav" %>
-      <%= render :partial => "partials/nav_officer" %>
+      <%= render :partial => "partials/topnav" %>
+      <%= render :partial => "partials/sidenav_officer" %>
     <% else %>
-      <%= render :partial => "partials/nav_guest" %>
+      <%= render :partial => "partials/sidenav_guest" %>
     <% end %>
    </header>
    <main>

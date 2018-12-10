@@ -7,22 +7,33 @@
   <div id="whitebox">
     <table id="customTable">
       <thead>
-        <th>Name</th> 
+        <th>Name</th>
+        <th>Unit</th>
         <th>Rank</th>
-  
-  
-        <th class="align_center">Edit</th>
+        <% if can? :edit, officers %>
+          <th class="align_center">Edit</th>
+        <% end %>
       </thead>
       <% for officer in officers %>
         <tr>
-          <td><%= link_to officer.proper_name, officer_path(officer) %></td>
-          <td><%= officer.rank %></td>
-  
-          <td class="align_center">
-            <%= link_to edit_officer_path(officer) do %>
-                <i class="material-icons">edit</i>
-            <% end %>
-          </td>
+          <% if can? :read, officer %>
+            <td><%= link_to officer.proper_name, officer_path(officer) %></td>
+            <td><%= officer.rank %></td>
+          <% end %>
+          <% if can? :read, Unit %>
+            <td><%= link_to officer.unit.name, unit_path(officer.unit) %></td>
+          <% else %>
+            <td><%= officer.unit.name %></td>
+          <% end %>
+          
+          <% if can? :edit, officers%>
+            <td class="align_center">
+              <%= link_to edit_officer_path(officer) do %>
+                  <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+          <% end %>
+          
         </tr>
       <% end %>
     </table>
