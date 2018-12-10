@@ -1,7 +1,6 @@
 <div class="card">
  <div class="card-content">
-  <span class="card-title">Longest</span>
-    <span class="card-title">Unit Investigations</span>
+  <span class="card-title">Unit Investigations</span>
    <table class="lined">
        <thead>
            <th>Title</th>
@@ -13,18 +12,21 @@
        </thead>
      <% for invest in @unit_investigations %>
           <tr>
-            <td><%= invest %></td>
-            <td><%= Date.today - invest.start_opened %></td>
+            <td><%= invest.investigation.title %></td>
+            <td><%= (Date.today.strftime('%j').to_i - invest.investigation.date_opened.strftime('%j').to_i) %></td>
             <td><%= CrimeInvestigation.for_investigation(invest).count%></td>
             <td>
-                <%= link_to edit_investigation_path(investigation) do %>
+                <%= link_to edit_investigation_path(invest.investigation) do %>
                   <i class="material-icons">edit</i>
                 <% end %>
             </td>
              </tr>
     <% end %>
   </table>
+    <%= will_paginate @unit_investigations, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+
 </div>
+
     <% if can? :new, Investigation %>
       <div class="card grey lighten-3">
         <div class="card-action">
