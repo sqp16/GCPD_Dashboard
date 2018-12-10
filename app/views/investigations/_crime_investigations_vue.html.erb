@@ -43,7 +43,8 @@
 <!-- Defining Vue templates to work with components -->
 <script type="text/x-template" id="crime-investigation-row">
   <li>
-    {{ crime_investigation.crime }}
+    <a v-on:click="remove_record(crime)" class="remove">x&nbsp;&nbsp;</a>
+    {{ crime_investigation.crime.name }}
   </li>
   // Commenting this out b/c template in js file, but if I wanted it here...
   // <li>
