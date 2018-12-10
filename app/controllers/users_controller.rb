@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_login
-#   authorize_resource
+  authorize_resource
 
   def index
     # finding all the active owners and paginating that list (will_paginate)

@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :check_login
-
+  authorize_resource
+  
   def new
     @assignment = Assignment.new
     @active_officers = Officer.active.alphabetical.paginate(page: params[:page]).per_page(5)

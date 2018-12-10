@@ -1,5 +1,6 @@
 class InvestigationNotesController < ApplicationController
     before_action :check_login
+    authorize_resource
     
     def new
         @investigation_note = InvestigationNote

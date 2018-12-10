@@ -1,5 +1,6 @@
 class CrimeInvestigationsController < ApplicationController
     before_action :check_login
+    authorize_resource
     
     def new
         @crime_investigation = CrimeInvestigation
@@ -18,6 +19,13 @@ class CrimeInvestigationsController < ApplicationController
             flash[:alert] = "Failed to add crime to investigation because either crime is inactive or investigation is closed."
             redirect_to investigation_path(@investigation)
         end
+    end
+    
+    def destroy
+        @crime_investigation = CrimeInvestigation.find(params[:id])
+        @crime_investigation.destroy
+        flash[:notice] = "Successfully removed #{crime_investigation.crime.name} from investigation crimes."
+        redirect_to investigation_path(@crime_investigation.investigation)
     end
     
     private
