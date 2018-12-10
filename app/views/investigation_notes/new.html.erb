@@ -1,6 +1,5 @@
 <% unless @investigation.nil? %>
   <%= render :partial => "add_from_investigation" %>
 <% else %>
-    <% console.log("HI") %>
-    <%= render :partial => "add_from_dashboard" %>
+    <%= render :partial => "add_from_dashboard", locals: { officer_id: @current_user.officer} %>
 <% end %>
