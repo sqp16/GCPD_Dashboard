@@ -1,4 +1,6 @@
-<% if @officer_investigations.nil? %>
+<% if @officer_id.nil? and @investigation_id.nil? %>
+  <%= render :partial => "assign_from_dashboard" %>
+<% elsif @officer_investigations.nil? %>
   <%= render :partial => "assign_from_investigation" %>
 <% else %>
   <%= render :partial => "assign_from_officer" %>
