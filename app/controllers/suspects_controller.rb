@@ -25,6 +25,9 @@ class SuspectsController < ApplicationController
             elsif params[:suspect][:from] == 'investigation'
                 flash[:notice] = "Successfully added '#{@suspect.criminal.proper_name}' to '#{@suspect.investigation.title}'."
                 redirect_to investigation_path(@suspect.investigation)
+            else
+                flash[:notice] = "Successfully added '#{@suspect.criminal.proper_name}' to '#{@suspect.investigation.title}'."
+                redirect_to investigation_path(@suspect.investigation)
             end
         else
             if params[:suspect][:from] == 'criminal'
@@ -33,6 +36,10 @@ class SuspectsController < ApplicationController
             elsif params[:suspect][:from] == 'investigation'
                 @investigation = Investigation.find(params[:suspect][:investigation_id])
                 render action: 'new', locals: { investigation: @investigation }
+            else
+                @criminal = Criminal.find(:criminal_id)
+                @investigation = Investigation.find(:investigation_id)
+                render action: 'new', locals: { investigation: @investigation, criminal: @criminal }
             end
         end
     end
@@ -45,6 +52,9 @@ class SuspectsController < ApplicationController
             flash[:notice] = "#{@suspect.criminal.proper_name} is no longer a suspect in '#{@suspect.investigation.title}'."
             redirect_to criminal_path(@suspect.criminal)
         elsif params[:from] == 'investigation'
+            flash[:notice] = "#{@suspect.criminal.proper_name} is no longer a suspect in '#{@suspect.investigation.title}'."
+            redirect_to investigation_path(@suspect.investigation)
+        else
             flash[:notice] = "#{@suspect.criminal.proper_name} is no longer a suspect in '#{@suspect.investigation.title}'."
             redirect_to investigation_path(@suspect.investigation)
         end

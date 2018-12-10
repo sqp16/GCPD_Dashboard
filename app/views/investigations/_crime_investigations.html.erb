@@ -1,16 +1,16 @@
-<% unless @crime_investigations.empty? %>
+<% unless @investigation.crime_investigations.empty? %>
   <div class="card yellow lighten-4">
     <div class="card-content">
       <span class="card-title">Crime Investigations</span>
       <ul>
-        <% for crime in @crime_investigations %>
+        <% for crime in @investigation.crime_investigations %>
           <li>
             <% if can? :destroy, CrimeInvestigation %>
                 <%= link_to(crime_investigation_path(crime), method: :delete, class: 'remove') do %>
                     x&nbsp;&nbsp;
                 <% end %>
             <% end %>
-            <%= link_to crime.crime.name, crime_path(crime.crime) %>
+            <%= crime.crime.name %>
           </li>
         <% end %>
       </ul>

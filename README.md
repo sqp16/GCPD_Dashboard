@@ -29,4 +29,8 @@ Known Issues...
 ---
 Make sure you refresh the page after pressing "X" for removing a crime from a investigation,(the crime does get removed, but the page doesn't rerender automatically) there is a bug with Vue at the moment.
 
+Notes
+---
+Dashboard:
+if there are current suspects or past suspects, can dropdown from list of assignments
 

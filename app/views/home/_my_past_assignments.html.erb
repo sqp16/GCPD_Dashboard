@@ -1,0 +1,24 @@
+<%unless @current_user.officer.assignments.past.empty? %>
+  <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">Past Assignments</span>
+      <!--expandable table of officers curr assignments-->
+       <table class="lined">
+        <thead>
+            <th>Case</th>
+            <th>Terminated</th>
+        </thead>
+        </table>
+        <ul class="collapsible" data-collapsible="expandable">
+        <% for assignment in @current_user.officer.assignments.past %>
+          <li>
+            <div class="collapsible-header grey lighten-3">
+              
+              &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+              &nbsp;&nbsp;<%= assignment.end_date.strftime("%m/%d/%y") %>
+             <div>
+          </li>
+        <% end %>
+    </div>
+  </div>
+<% end %>

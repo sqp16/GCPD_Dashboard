@@ -1,3 +1,9 @@
-<%= render :partial => "investigation_notes_vue" %>
-<br/>
-<%= render :partial => "crime_investigations_vue" %>
+<!--Getting around the infinite loop that being logged in as an officer causes...-->
+<% unless current_user.role? :officer %>
+    <%= render :partial => "investigation_notes_vue" %>
+    <br/>
+    <%= render :partial => "crime_investigations_vue" %>
+<% else %>
+    <%= render :partial => "investigation_notes" %>
+    <%= render :partial => 'crime_investigations' %>
+<% end %>

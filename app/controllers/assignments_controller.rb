@@ -25,6 +25,9 @@ class AssignmentsController < ApplicationController
       elsif params[:assignment][:from] == 'investigation'
         flash[:notice] = "Successfully assigned '#{@assignment.officer.proper_name}' to '#{@assignment.investigation.title}'."
         redirect_to investigation_path(@assignment.investigation)
+      else
+        flash[:notice] = "Successfully assigned '#{@assignment.officer.proper_name}' to '#{@assignment.investigation.title}'."
+        redirect_to investigation_path(@assignment.investigation)
       end
     else
       if params[:assignment][:from] == 'officer'
@@ -33,6 +36,10 @@ class AssignmentsController < ApplicationController
       elsif params[:assignment][:from] == 'investigation'
         @investigation = Investigation.find(params[:assignment][:investigation_id])
         render action: 'new', locals: { investigation: @investigation }
+      else
+        @officer = Officer.find([:officer_id])
+        @investigation = Investigation.find([:investigation_id])
+        render action: 'new', locals: { investigation: @investigation, officer: @officer }
       end
     end
   end

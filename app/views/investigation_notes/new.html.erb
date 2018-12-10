@@ -1,25 +1,5 @@
-<div class="row">
-  <div class="col s8">
-    <h4>New Investigation Note:</h4>
-    <%= simple_form_for(@investigation_note) do |f| %>
-      <%= f.error_notification %>
-      <div class="row">
-        <div class="form-inputs">
-            <%= f.input :investigation_id, as: :hidden, input_html: { value: @investigation.id } %>
-            <%= f.input :officer_id, as: :hidden, input_html: { value: @current_user.officer } %>
-            <%= f.input :content, label_html: { class: 'active' } %>
-            <%= f.input :date, input_html: { value: Date.current } %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-actions col s8">
-          <%= f.button :submit %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="col s4">
-    <h4>For Investigation:</h4>
-    <h5>Investigation: <%= @investigation.title %></h5>
-  </div>
-</div>
+<% unless @investigation.nil? %>
+  <%= render :partial => "add_from_investigation" %>
+<% else %>
+    <%= render :partial => "add_from_dashboard" %>
+<% end %>

@@ -1,0 +1,110 @@
+<%unless @current_user.officer.assignments.current.empty? %>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Current Assignments</span>
+      <!--expandable table of officers curr assignments-->
+       <table class="lined">
+        <thead>
+            <th>Case</th>
+            <th>Starting</th>
+        </thead>
+        </table>
+        <ul class="collapsible" data-collapsible="expandable">
+        <% for assignment in @current_user.officer.current_assignments %>
+          <li>
+            <div class="collapsible-header">
+              
+              <% if can? :terminate, Assignment %>
+                <%= link_to(terminate_assignment_path(assignment, from: "officer"), class: 'remove', method: :patch) do %>
+                  x&nbsp;&nbsp;
+                <% end %>
+              <% end %>
+              
+              &nbsp;<%= link_to assignment.investigation.title, investigation_path(assignment.investigation) %>
+              &nbsp;&nbsp;<%= assignment.start_date.strftime("%m/%d/%y") %>
+
+              <% unless (assignment.investigation.suspects.current.empty? and (assignment.investigation.suspects.alphabetical.to_a - assignment.investigation.suspects.current).empty?) %>
+                <i class="material-icons">arrow_drop_down</i>
+              <% end %>
+              </div>
+              
+            <% unless (assignment.investigation.suspects.current.empty? and (assignment.investigation.suspects.alphabetical.to_a - assignment.investigation.suspects.current).empty?) %>
+              <div class="collapsible-body">
+                <!--table for current suspects in investigation-->
+                <% unless assignment.investigation.suspects.current.empty? %>
+                <table>
+                  <h7>Current Suspects</h7>
+                  <thead>
+                    <th>Suspect Name</th>
+                    <th>Aka </th>
+                    <th>Added On</th>
+                  </thead>
+                  
+                <% for suspect in assignment.investigation.suspects.current %>
+                  <td><% if can? :remove, Suspect %>
+                    <%= link_to(remove_suspect_path(suspect, from: "investigation"), class: 'remove', method: :patch) do %>
+                      x&nbsp;&nbsp;
+                    <% end %>
+                  <% end %>
+                  
+                  &nbsp;<%= link_to suspect.criminal.proper_name, criminal_path(suspect.criminal) %></td>
+                  &nbsp;<td><%= suspect.criminal.aka %></td>
+                  &nbsp;<td><%= suspect.added_on %></td>
+                
+                <% end %>
+                </table>
+                <% end %>
+                
+                <!--Table for past suspects within the investigation-->
+                <% unless (assignment.investigation.suspects.alphabetical.to_a - assignment.investigation.suspects.current).empty? %>
+                  <br />
+                  <table>
+                    <h7>Past Suspects</h7>
+                    <thead>
+                      <th>Suspect Name</th>
+                      <th>Aka </th>
+                      <th>Added On</th>
+                    </thead>
+                    
+                  <% for suspect in (assignment.investigation.suspects.alphabetical.to_a - assignment.investigation.suspects.current) %>
+                    <td><% if can? :remove, Suspect %>
+                      <%= link_to(remove_suspect_path(suspect, from: "investigation"), class: 'remove', method: :patch) do %>
+                        x&nbsp;&nbsp;
+                      <% end %>
+                    <% end %>
+                    
+                    &nbsp;<%= link_to suspect.criminal.proper_name, criminal_path(suspect.criminal) %></td>
+                    &nbsp;<td><%= suspect.criminal.aka %></td>
+                    &nbsp;<td><%= suspect.added_on %></td>
+                  
+                  <% end %>
+                  </table>
+                <%end %>
+              </div>
+            <% end %>
+            
+          </li>
+          <% end %>
+      </ul>
+    </div>
+     <% if can? :new, Assignment %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+          <%= link_to "Add a new assignment", new_assignment_path(officer_id: @current_user.officer.id) %>
+      </div>
+      <% end %>
+      <% if can? :new, Suspect %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+          <%= link_to "Add a new suspect", new_suspect_path(officer_id: @current_user.officer.id) %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+   <div class="card grey lighten-3">
+    <div class="card-content">
+      <span class="card-title">No Current Assignments</span>
+    </div>
+   </div>
+<% end %>

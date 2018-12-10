@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-content">
+    <b>Current Unit:&nbsp;&nbsp;</b>
+      <%= link_to @current_user.officer.unit.name, unit_path(@current_user.officer.unit) %>
+      <% if @current_user.officer.user.role?(:chief) %>
+        &nbsp;&nbsp;<i>*Unit Chief</i>
+      <% end%>     
+      <br /><br />
+
+    <b>Current Rank:&nbsp;&nbsp;</b>
+      <%= @current_user.officer.rank %><br /><br />
+
+    <b>SSN:&nbsp;&nbsp;</b>
+    <% if can? :edit, @current_user.officer %>
+      <%= best_in_place @current_user.officer, :ssn, as: :input %>&nbsp;&nbsp;<i class="material-icons">edit</i><br /><br />
+    <%else %>
+      <%= @current_user.officer.ssn %>
+    <% end %>
+    
+    <b>Username:&nbsp;&nbsp;</b>
+     <% if can? :edit, @current_user.officer.user %>
+      <%= best_in_place @current_user.officer.user, :username, as: :input %>&nbsp;&nbsp;<i class="material-icons">edit</i><br /><br />
+    <%else %>
+      <%= @current_user.officer.user.username %>
+    <% end %>
+      
+    <b>Active with GCPD?&nbsp;&nbsp;</b>
+      <% if can? :edit, @current_user.officer %>
+        <div class='btn'><%= best_in_place @current_user.officer, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;<i class="material-icons">edit</i>
+      <% else %>
+        <%= @current_user.officer.active ? "Yes" : "No" %><br><br><br>
+      <% end %>
+  </div>
+</div>

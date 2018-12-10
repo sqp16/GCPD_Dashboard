@@ -17,6 +17,8 @@
 //= require vue
 //= require best_in_place
 //= require_tree .
+//= require jquery-ui
+//= require best_in_place.jquery-ui
 
 // @import "materialize";
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";
@@ -61,7 +63,17 @@ $(document).ready(function() {
   })
 });
 
+// collapsible
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+  
+// tabs
+$(document).ready(function(){
+    $('ul.tabs').tabs();
+    swipeable: true
+});
 
-
+      
 
 

@@ -1,13 +1,21 @@
-<div class="row">
-  <div class="col s8">
-    <div class="card ">
-      <div class="card-content">
-        <h4>Welcome to the GCPD Crime Tracking System!</h4>
-        <p>This system is created to help organize and maintain information about our police department in
-        order to help ensure and maintain public safety in the city of Gotham. 
-        All information within this portal is confidential and should not be shared to the public.
-        Failure to comply will result in severe consequences.</p>
+<% if @current_user.role? :guest %>
+  <div class="row">
+    <div class="col s8">
+      <div class="card ">
+        <div class="card-content">
+          <h4>Welcome to the GCPD Crime Tracking System!</h4>
+          <p>This system is created to help organize and maintain information about our police department in
+          order to help ensure and maintain public safety in the city of Gotham. 
+          All information within this portal is confidential and should not be shared to the public.
+          Failure to comply will result in severe consequences.</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% elsif @current_user.role? :officer %>
+  <%= render :partial => "officer_dashboard" %>
+<% elsif @current_user.role? :chief %>
+  <%= render :partial => "chief_dashboard" %>
+<% else %>
+  <%= render :partial => "commish_dashboard" %>
+<% end %>

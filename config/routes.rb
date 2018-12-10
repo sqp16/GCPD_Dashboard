@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   resources :investigations
   resources :crimes
   resources :criminals
-  resources :investigation_notes
   resources :crime_investigations
 
   # Routes for assignments
@@ -35,6 +34,8 @@ Rails.application.routes.draw do
   post 'suspects', to: 'suspects#create', as: :suspects
   patch 'suspects/:id/remove', to: 'suspects#remove', as: :remove_suspect
 
+  get 'investigation_notes/new', to: 'investigation_notes#new', as: :new_investigation_note
+  post 'investigation_notes', to: 'investigation_notes#create', as: :investigation_notes
   # Toggle paths
 
 
