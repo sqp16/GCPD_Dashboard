@@ -8,6 +8,7 @@
            <th>Rank</th>
            <th>Unit</th>
            <% if can? :edit, @officers %>
+                <th>Active?</th>
                <th class="align_center">Edit</th>
             <% end %>
        </thead>
@@ -37,11 +38,11 @@
     <% end %>
   </table>
   <%= will_paginate @units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
-   <% if can? :new, Officer %>
-      <div class="card ">
+</div>
+<% if can? :new, Officer %>
+      <div class="card grey lighten-3">
         <div class="card-action">
         <%= link_to "Add a new officer", new_officer_path %>
      </div>
-   <% end %>    
-</div>
+   <% end %>  
 </div>

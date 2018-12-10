@@ -1,5 +1,6 @@
 <% unless @investigation.nil? %>
   <%= render :partial => "add_from_investigation" %>
 <% else %>
+    <% console.log("HI") %>
     <%= render :partial => "add_from_dashboard" %>
 <% end %>

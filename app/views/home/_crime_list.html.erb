@@ -1,0 +1,41 @@
+<div class="card">
+ <div class="card-content">
+  <span class="card-title">Active Crimes</span>
+  <!--expandable table of officers curr assignments-->
+   <table class="lined">
+       <thead>
+           <th>Crime Name</th>
+           <th>Offense</th>
+           <th>Number of Investigations: </th>
+           <% if can? :edit, @officers %>
+                <th>Active?</th>
+               <th class="align_center">Edit</th>
+            <% end %>
+       </thead>
+     <% for crime in @crimes %>
+      <tr>
+        <td><%= crime.name %></td>
+        <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
+        <td><%= CrimeInvestigation.for_crime(crime).count %></td>
+       
+       
+        <% if can? :edit, @crimes %>
+          <td><div class='btn'><%= best_in_place crime, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;</td>
+          <td class="align_center">
+            <%= link_to edit_crime_path(crime) do %>
+              <i class="material-icons">edit</i></td>
+            <% end %>
+        <% end %>
+        
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+</div>
+<% if can? :new, Crime %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+        <%= link_to "Add a new crime", new_crime_path %>
+     </div>
+   <% end %>  
+</div>

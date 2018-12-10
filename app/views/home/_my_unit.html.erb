@@ -1,0 +1,39 @@
+ <div class="card">
+    <div class="card-content">
+     <span class="card-title">My Unit: </span>
+     <%= @my_unit.name %> <br />
+     <span>Number of Active Officers: </span><%= @my_officers.count%>
+      <table class="lined">
+        <thead>
+          <th>Officer Name</th>
+          <th>Number of Current Assignments</th>
+          <th>Active ?</th>
+          <th class="align_center">Edit</th>
+        </thead>
+        
+        <!--Generates list of open investigations in chronological order-->
+        <% for officer in @my_officers %>
+          <tr>
+            <td><%= link_to officer.name, officer_path(officer)%></td>
+            <td><%= officer.assignments.current.count %></td>
+            <td><div class='btn'><%= best_in_place officer, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></td>&nbsp;&nbsp;
+             </td>
+             <td>
+                <%= link_to edit_officer_path(officer) do %>
+                    <i class="material-icons">edit</i>
+                <% end %>
+              </td>
+          </tr>
+        <% end %>
+      </table>
+  </div>
+  <%= will_paginate @my_officers, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+  <% if can? :new, Officer %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+          <%= link_to "Add a new officer", new_officer_path(Unit_id: @current_user.officer.unit) %>
+          </div>
+      </div>
+  <% end %>
+</div>
+        

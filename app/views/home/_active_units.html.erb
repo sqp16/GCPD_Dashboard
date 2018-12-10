@@ -7,6 +7,7 @@
            <th>Unit Name</th>
            <th>Number of Active Officers</th>
            <th>Number of Open Investigations</th>
+           <th>Active?</th>
            <th class="align_center">Edit</th>
        </thead>
      <% for unit in @units %>
@@ -31,6 +32,12 @@
     <% end %>
   </table>
   <%= will_paginate @units, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
-  <%      
-</div>
+ </div>
+ <% if can? :new, Unit %>
+    <div class="card grey lighten-3">
+        <div class="card-action">
+        <%= link_to "Add a new unit", new_unit_path %>
+        </div>
+    </div>
+<% end %> 
 </div>

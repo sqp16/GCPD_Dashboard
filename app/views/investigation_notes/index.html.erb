@@ -1,0 +1,25 @@
+<% unless @current_user.officer.investigation_notes.empty? %>
+<div class="card">
+  <div clas="card-content">
+          <table id="customTable">
+            <thead>
+              <th>Date</th>
+              <th>Investigation</th>
+              <th>Content</th>
+            </thead>
+        
+        <!--Generates list of open investigations in chronological order-->
+        <% for note in @current_user.officer.investigation_notes %>
+          <tr>
+            <td><%= note.date%></td>
+            <td><%= link_to note.investigation.title, investigation_path(note.investigation) %></td>
+            <td><%= note.content %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
+<%= link_to "Add a New Investigation Note", new_investigation_note_path, class: 'waves-effect waves-light btn' %> 
+
+        

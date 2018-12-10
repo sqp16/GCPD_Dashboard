@@ -30,7 +30,7 @@
           
           <% if can? :edit, officers%>
               <td><div class='btn'><%= best_in_place officer, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;
-              <td>
+              </td><td>
                 <%= link_to edit_officer_path(officer) do %>
                     <i class="material-icons">edit</i>
                 <% end %>
