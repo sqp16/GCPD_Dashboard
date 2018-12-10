@@ -9,7 +9,13 @@
 
     <b>Current Rank:&nbsp;&nbsp;</b>
       <%= @current_user.officer.rank %><br /><br />
-
+      
+    <b>Number of Current Assignments:&nbsp;&nbsp;</b>
+      <%= @current_user.officer.assignments.current.count %><br /><br />
+    
+    <b>Number of Assignments All Time:&nbsp;&nbsp;</b>
+      <%= @current_user.officer.assignments.count %><br /><br />
+      
     <b>SSN:&nbsp;&nbsp;</b>
     <% if can? :edit, @current_user.officer %>
       <%= best_in_place @current_user.officer, :ssn, as: :input %>&nbsp;&nbsp;<i class="material-icons">edit</i><br /><br />

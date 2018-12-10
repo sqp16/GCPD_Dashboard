@@ -2,6 +2,7 @@
   <div class="card-content">
     <h5>Officer Information for <%= @officer.proper_name %></h5><br />
 
+
     <b>Current Unit:&nbsp;&nbsp;</b>
       <%= link_to @officer.unit.name, unit_path(@officer.unit) %>
       <% if @officer.user.role?(:chief) %>
@@ -9,16 +10,25 @@
       <% end%>     
       <br /><br />
 
-    <b>Current Rank:&nbsp;&nbsp;</b>
-      <%= @officer.rank %><br /><br />
-
-    <b>SSN:&nbsp;&nbsp;</b>
-      <%= @officer.ssn %><br /><br />
+   <b>SSN:&nbsp;&nbsp;</b>
+    <% if can? :edit, @officer %>
+      <%= best_in_place @officer, :ssn, as: :input %>&nbsp;&nbsp;<i class="material-icons">edit</i><br /><br />
+    <%else %>
+      <%= @officer.ssn %>
+    <% end %>
 
     <b>Username:&nbsp;&nbsp;</b>
-      <%= @officer.user.username %><br /><br />
+     <% if can? :edit, @officer.user %>
+      <%= best_in_place @officer.user, :username, as: :input %>&nbsp;&nbsp;<i class="material-icons">edit</i><br /><br />
+    <%else %>
+      <%= @officer.user.username %>
+    <% end %>
 
-    <b>Active with GCPD?&nbsp;&nbsp;</b>
-      <%= @officer.active ? "Yes" : "No" %><br><br><br>
+  <b>Active with GCPD?&nbsp;&nbsp;</b>
+      <% if can? :edit, @current_user.officer %>
+        <div class='btn'><%= best_in_place @officer, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;<i class="material-icons">edit</i>
+      <% else %>
+        <%= @officer.active ? "Yes" : "No" %><br><br><br>
+      <% end %>
   </div>
 </div>

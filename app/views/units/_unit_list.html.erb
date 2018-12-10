@@ -7,9 +7,9 @@
   <table id="customTable">
     <thead>
       <th class="align_center">Unit</th>
-
       <th class="align_center">Number of Active Officers</th>
       <th class="align_center">Number of Current Investigations</th>
+      <th class="align_center">Active?</th>
       <% if can? :edit, units %>
         <th class="align_center">Edit</th>
       <% end %>
@@ -24,12 +24,13 @@
         <% end %>
         <td><%= unit.number_of_active_officers%></td>
         <td><%= unit.number_of_unique_open_investigations%></td>
+        
         <% if can? :edit, units %>
+          <td><div class='btn'><%= best_in_place unit, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;</td>
           <td class="align_center">
-          <%= link_to edit_unit_path(unit) do %>
-          <i class="material-icons">edit</i>
-        <% end %>
-          </td>
+            <%= link_to edit_unit_path(unit) do %>
+              <i class="material-icons">edit</i></td>
+            <% end %>
         <% end %>
         
       </tr>

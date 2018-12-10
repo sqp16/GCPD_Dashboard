@@ -20,21 +20,13 @@
         <td><%= crime.name %></td>
         <td><%= crime.felony ? "Felony" : "Misdemeanor" %></td>
          <% if can? :edit, crime %>
-          <td id="auto_submit_form">
-            <%= simple_form_for(crime) do |f| %>
-              <div class="row">
-                <div class="form-inputs">
-                  <%= f.input :active %>
-                </div>
-              </div>
-            <% end %>
-          </td
-          <td class="align_center">
-            <%= link_to edit_crime_path(crime) do %>
-              <i class="material-icons">edit</i>
-            <% end %>
-          </td>
-        <% end %>
+            <td><div class='btn'><%= best_in_place crime, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;
+            <td class="align_center">
+              <%= link_to edit_crime_path(crime) do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+         <% end %>
       </tr>
       <% end %>
     </table>

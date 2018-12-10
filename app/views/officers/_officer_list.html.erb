@@ -10,8 +10,10 @@
         <th>Name</th>
         <th>Unit</th>
         <th>Rank</th>
+        
         <% if can? :edit, officers %>
-          <th class="align_center">Edit</th>
+          <th>Active?</th>
+          <th>Edit</th>
         <% end %>
       </thead>
       <% for officer in officers %>
@@ -27,11 +29,12 @@
           <% end %>
           
           <% if can? :edit, officers%>
-            <td class="align_center">
-              <%= link_to edit_officer_path(officer) do %>
-                  <i class="material-icons">edit</i>
-              <% end %>
-            </td>
+              <td><div class='btn'><%= best_in_place officer, :active, as: :checkbox, collection: {false:"No", true:"Yes"}%></div>&nbsp;&nbsp;
+              <td>
+                <%= link_to edit_officer_path(officer) do %>
+                    <i class="material-icons">edit</i>
+                <% end %>
+              </td>
           <% end %>
           
         </tr>

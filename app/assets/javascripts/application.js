@@ -68,11 +68,6 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
   });
   
-// tabs
-$(document).ready(function(){
-    $('ul.tabs').tabs();
-    swipeable: true
-});
 
       
 
