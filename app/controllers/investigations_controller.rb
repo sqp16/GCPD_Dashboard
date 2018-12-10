@@ -1,7 +1,7 @@
 class InvestigationsController < ApplicationController
-  before_action :set_investigation, only: [:show, :edit, :update, :close, :crimes, :investigation_notes]
+  before_action :set_investigation, only: [:show, :edit, :update, :close, :crimes, :investigation_notes, :crime_investigations]
   before_action :check_login
-
+  authorize_resource
 
   def index
     @open_investigations = Investigation.is_open.chronological.paginate(page: params[:page]).per_page(10)
@@ -40,6 +40,10 @@ class InvestigationsController < ApplicationController
     @investigation_notes = @investigation.investigation_notes.to_a.map {|note| {note: note, officer: note.officer, url: officer_path(note.officer)}}
   end
   
+  def crime_investigations
+    # @crime_investigations = @investigation.crime_investigations.to_a.map {|crime| crime}
+    @crime_investigations = CrimeInvestigation.for_investigation(@investigation.id).joins(:crime).select('crime_investigations.*, crimes.name as crime_name')
+  end
     #New Search Function
   def search
     if params[:query].blank?

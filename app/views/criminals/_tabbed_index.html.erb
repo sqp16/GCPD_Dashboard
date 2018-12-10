@@ -5,7 +5,7 @@
       <%= render :partial => "criminal_list", locals: {criminals: @all_criminals, state: 'all'} %>
     </tab>
     
-    <tab name="convicted felon" v-bind:selected="true">
+    <tab name="convicted felon" >
       <%= render :partial => "criminal_list_felons", locals: {criminals: @convicted_felon, state: 'convicted felon'} %>
     </tab>
 

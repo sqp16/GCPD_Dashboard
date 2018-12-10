@@ -1,0 +1,65 @@
+<div id="crime_investigation_handling">
+  <%= hidden_field_tag "investigation_id", @investigation.id %>
+  <% unless @investigation.crime_investigations.empty? %>
+    <div class="card yellow lighten-4">
+      <div class="card-content">
+        <span class="card-title">Investigation Crimes</span>
+        <ul is='crime-investigation-row' 
+            v-for="crime in crime_investigations" 
+            v-bind:crime_investigation="crime"
+            class="no_bullet">  
+        </ul>
+      </div>
+      <% if can? :new, CrimeInvestigation %>
+        <div class="card-action">
+          <!-- Could bind title based on state, but chance to show v-else directive -->
+          <div v-if="modal_open">
+            <%= link_to "Cancel crime", "#", {%s(v-on:click) => "switch_modal()"} %>
+          </div>
+          <div v-else>
+            <%= link_to "Add a new crime", "#", {%s(v-on:click) => "switch_modal()"} %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <% if can? :new, CrimeInvestigation %>
+      <div class="card grey lighten-3">
+        <div class="card-action">
+          <!-- Note in class that message not consistent with activity -->
+          <%= link_to "Add a new crime", "#", {%s(v-on:click) => "switch_modal()"} %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>  
+
+  <div v-if="modal_open">
+    <new-crime-investigation-form></new-crime-investigation-form>
+  </div>
+
+</div> <!-- End of div#crime_investigation_handling -->
+
+
+<!-- Defining Vue templates to work with components -->
+<script type="text/x-template" id="crime-investigation-row">
+  <li>
+    {{ crime_investigation.crime }}
+  </li>
+  // Commenting this out b/c template in js file, but if I wanted it here...
+  // <li>
+  //   <a v-on:click="remove_record(dosage)" class="remove">x&nbsp;&nbsp;</a>
+  //   {{ dosage.medicine_name }}:&nbsp;&nbsp;
+  //   {{ dosage.units_given }}&nbsp;units
+  // </li>
+</script>
+
+<!--  much easier to include this complicated template here 
+      rather than in the js file (IMO) -->
+<script type="text/x-template" id="crime-investigation-form">
+  <%= render "crime_investigation_form", locals: {investigation: @investigation, crime: @crime, crime_investigation: CrimeInvestigation.new} %>
+</script>
+
+
+
+
+

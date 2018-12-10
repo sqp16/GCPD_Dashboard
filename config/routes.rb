@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :crimes
   resources :criminals
   resources :investigation_notes
+  resources :crime_investigations
 
   # Routes for assignments
   get 'assignments/new', to: 'assignments#new', as: :new_assignment
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
 
   # Other custom routes
   get 'investigations/:id/investigation_notes', to: 'investigations#investigation_notes', as: :investigation_investigation_notes
+  get 'investigations/:id/crime_investigations', to: 'investigations#crime_investigations', as: :investigation_crime_investigations
   patch 'investigations/:id/close', to: 'investigations#close', as: :close_investigation
 
   # Routes for searching
